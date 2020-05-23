@@ -14,8 +14,8 @@ class App extends Component {
   };
 
   checkAnswer = (answer) => {
-    if(answer.toLowerCase() === this.state.currentAnswer) {
-      alert("Correct! Well done!");
+    if(answer.toLowerCase() !== this.state.currentAnswer) {
+      alert("Oops! The correct answer for " + this.state.currentCharacter + " is \"" + this.state.currentAnswer + "\".");
     }
 
     this.loadNewCharacter();
