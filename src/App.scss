@@ -1,0 +1,133 @@
+$fontFamily: 'Source Sans Pro', Sans-serif;
+$mainColor: rgba(200, 50, 50, 1);
+$mainColorHover: darken($mainColor, 20);
+$white: #fff;
+$inputBackground: #e5e5e5;
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $fontFamily;
+  background: #fff;
+  color: #333;
+}
+
+#root {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: $mainColor;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  min-height: 100%;
+  position: relative;
+}
+
+.header {
+  margin-bottom: 30px;
+  user-select: none;
+
+  h1 {
+    font-family: 'Kaushan Script';
+    font-size: 80px;
+    position: relative;
+    margin: 0;
+
+    span {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-weight: 300;
+      margin: 0;
+      font-size: 16px;
+      position: absolute;
+      right: 0;
+      bottom: -5px;
+    }
+  }
+
+  .author {
+    color: #cc5555;
+    font-size: 14px;
+  }
+}
+
+.character {
+  font-size: 100px;
+  background: $mainColor;
+  color: $white;
+  border-radius: 9999px;
+  height: 250px;
+  line-height: 250px;
+  width: 250px;
+  margin: auto;
+  vertical-align: middle;
+  margin-bottom: 30px;
+  user-select: none;
+}
+
+.input {
+  position: relative;
+
+  .answer {
+    background: $inputBackground;
+    font-size: 24px;
+    border: none;
+    width: 100%;
+    display: block;
+    padding: 10px;
+    font-weight: 300;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .submit {
+    background: $mainColor;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    color: $white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.1s all ease;
+
+    &:hover {
+      background: $mainColorHover;
+    }
+  }
+
+  .skip {
+    border: none;
+    background: none;
+    transition: 0.2s all ease;
+    border-radius: 5px;
+
+    &:hover,
+    &:active {
+      background: $inputBackground;
+    }
+  }
+}
+
+input,
+button {
+  font-family: $fontFamily;
+  outline: none;
+}

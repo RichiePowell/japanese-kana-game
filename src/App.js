@@ -1,26 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Hiragana from './data/Hiragana.js';
+import Katakana from './data/Katakana.js'; 
+import Character from './components/Character.js';
+import Input from './components/Input.js';
+import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    characters: Object.assign(Hiragana, Katakana),
+    currentCharacter: '',
+    currentAnswer: ''
+  };
+
+  checkAnswer = (answer) => {
+    if(answer.toLowerCase() === this.state.currentAnswer) {
+      alert("Correct! Well done!");
+    }
+
+    this.loadNewCharacter();
+  }
+
+  loadNewCharacter = () => {
+    const keys = Object.keys(this.state.characters);
+    const randomKey = keys[keys.length * Math.random() << 0];
+
+    this.setState({
+      currentCharacter: randomKey,
+      currentAnswer: this.state.characters[randomKey]
+    });
+
+    return randomKey;
+  }
+
+  componentDidMount = () => {
+    this.loadNewCharacter();
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div className="container">
+          <header className="header">
+            <h1>
+              Japanese
+              <span>Kana Practice</span>
+            </h1>
+            {/* <a
+              className="author"
+              href="https://richpowell.co.uk/"
+            >
+              By Rich Powell
+            </a> */}
+          </header>
+          <Character
+            currentCharacter={ this.state.currentCharacter }
+          />
+          <Input
+            loadNewCharacter={ this.loadNewCharacter }
+            checkAnswer={ this.checkAnswer }
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
