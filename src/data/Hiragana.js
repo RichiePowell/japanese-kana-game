@@ -69,8 +69,8 @@ const Hiragana = {
   れ: 're',
   ろ: 'ro',
   わ: 'wa',
-  ゐ: 'wi',
-  ゑ: 'we',
+  ゐ: ['wi', 'i'],
+  ゑ: ['we', 'e'],
   を: 'wo'
 }
 

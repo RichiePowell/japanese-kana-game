@@ -14,11 +14,30 @@ class App extends Component {
   };
 
   checkAnswer = (answer) => {
-    if(answer.toLowerCase() !== this.state.currentAnswer) {
-      alert("Oops! The correct answer for " + this.state.currentCharacter + " is \"" + this.state.currentAnswer + "\".");
+    const currentAnswer = this.state.currentAnswer;
+    const currentCharacter = this.state.currentCharacter;
+    const userAnswer = answer.toLowerCase().trim();
+
+    if(userAnswer === '') {
+      return false;
+    }
+
+    if(
+      (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
+      || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
+    ) {
+      this.wrongAnswer(currentCharacter, currentAnswer);
     }
 
     this.loadNewCharacter();
+  }
+
+  wrongAnswer = (character, answer) => {
+    if(Array.isArray(answer)) {
+      answer = answer.join(' or ');
+    }
+
+    alert("Oops! The correct answer for " + character + " is " + answer + ".");
   }
 
   loadNewCharacter = () => {

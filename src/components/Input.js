@@ -6,13 +6,8 @@ class Input extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.currentAnswer = this.answer.current.value;
-    this.answer.current.focus();
-
-    if(this.currentAnswer === '') {
-      return false;
-    }
-
     this.props.checkAnswer(this.currentAnswer);
+    this.answer.current.focus();
     e.currentTarget.reset();
   }
 
