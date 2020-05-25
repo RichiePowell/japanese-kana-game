@@ -20,10 +20,11 @@ library.add(faVolumeUp, faVolumeMute);
 class App extends Component {
 
   state = {
-    characters: Object.assign(Hiragana, Katakana),
+    characters: {},
     currentCharacter: '',
     currentAnswer: '',
-    sound: true
+    sound: true,
+    kana: 'both'
   };
 
   checkAnswer = (answer) => {
@@ -64,10 +65,6 @@ class App extends Component {
       showWrongAnswerDialog: true
     }));
 
-    if(Array.isArray(answer)) {
-      answer = answer.join(' or ');
-    }
-
     if(this.state.sound) {
       const errorAudio = new Audio(errorAudioFile);
       errorAudio.play();
@@ -80,20 +77,35 @@ class App extends Component {
     }));
   }
 
-  loadNewCharacter = () => {
-    const keys = Object.keys(this.state.characters);
-    const randomKey = keys[keys.length * Math.random() << 0];
-
-    this.setState({
-      currentCharacter: randomKey,
-      currentAnswer: this.state.characters[randomKey]
-    });
-
-    return randomKey;
+  loadKana = () => {
+    this.setState( prevState => ({
+      characters:
+        (prevState.kana === 'both' ? {...Hiragana, ...Katakana} :
+        (prevState.kana === 'hiragana' ? Hiragana : Katakana))
+    }), this.loadNewCharacter);
   }
 
-  componentDidMount = () => {
-    this.loadNewCharacter();
+  loadNewCharacter = () => {
+    const keys = Object.keys(this.state.characters);
+    const character = keys[keys.length * Math.random() << 0];
+    const answer = this.state.characters[character];
+    const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer;
+    
+    this.setState({
+      currentCharacter: character,
+      currentAnswer: answer,
+      currentAnswerPrintable: answerPrintable
+    });
+
+    return character;
+  }
+
+  handleKanaChange = (kana) => {
+    this.setState({ kana: kana }, this.loadKana);
+  }
+
+  componentDidMount() {
+    this.loadKana();
   }
 
   render() {
@@ -113,14 +125,16 @@ class App extends Component {
           <Controls
             sound={ this.state.sound }
             toggleSound={ this.toggleSound }
+            loadKana={ this.loadKana }
+            handleKanaChange={ this.handleKanaChange }
             loadNewCharacter={ this.loadNewCharacter }
           />
           <SweetAlert
             show={this.state.showWrongAnswerDialog}
-            title={this.state.currentCharacter + " is " +this.state.currentAnswer}
+            title={this.state.currentCharacter + " is " +this.state.currentAnswerPrintable}
             type="error"
             onConfirm={() => {
-                this.setState({ showWrongAnswerDialog: false});
+                this.setState({ showWrongAnswerDialog: false });
                 this.loadNewCharacter();
               }
             }

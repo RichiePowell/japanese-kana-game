@@ -74,4 +74,4 @@ const Katakana = {
   ン: 'n'
 }
 
-export default Katakana
+export default Katakana;

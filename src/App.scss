@@ -123,12 +123,15 @@ a {
 }
 
 .controls {
-  button {
+  button,
+  select {
     border: 1px #ccc solid;
     background: none;
     transition: 0.2s all ease;
     border-radius: 5px;
-    padding: 5px;
+    line-height: 30px;
+    height: 30px;
+    padding: 0 5px;
     border-radius: 999px;
     cursor: pointer;
 
@@ -139,21 +142,21 @@ a {
 
     &.sound {
       width: 30px;
-      line-height: 30px;
       height: 30px;
       padding: 0;
       text-align: center;
       display: inline-block;
     }
 
-    &.skip {
+    &.kana{
       float: right;
     }
   }
 }
 
 input,
-button {
+button,
+select {
   font-family: $fontFamily;
   outline: none;
 }

@@ -74,4 +74,4 @@ const Hiragana = {
   を: 'wo'
 }
 
-export default Hiragana
+export default Hiragana;
