@@ -10,7 +10,7 @@ import Controls from './components/Controls.js';
 import './App.scss';
 
 /* Add FontAwesome icons via library */
-library.add(faVolumeUp, faVolumeOff);
+library.add(faVolumeUp, faVolumeMute);
 
 class App extends Component {
 
