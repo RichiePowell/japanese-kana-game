@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'typeface-kaushan-script';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
 import Hiragana from './data/Hiragana.js';
