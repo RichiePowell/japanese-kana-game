@@ -13,7 +13,7 @@ body {
 body {
   margin: 0;
   font-family: $fontFamily;
-  background: #fff;
+  background: #e5e5e5;
   color: #333;
 }
 
@@ -32,9 +32,15 @@ a {
   align-items: center;
   max-width: 400px;
   margin: auto;
-  text-align: center;
   min-height: 100%;
   position: relative;
+}
+
+.container {
+  background: #fff;
+  padding: 0 30px 15px 30px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .header {
@@ -77,6 +83,7 @@ a {
   vertical-align: middle;
   margin-bottom: 30px;
   user-select: none;
+  text-align: center;
 }
 
 .input {
@@ -106,22 +113,41 @@ a {
     padding: 10px 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    cursor: pointer;
     transition: 0.1s all ease;
 
     &:hover {
       background: $mainColorHover;
     }
   }
+}
 
-  .skip {
-    border: none;
+.controls {
+  button {
+    border: 1px #ccc solid;
     background: none;
     transition: 0.2s all ease;
     border-radius: 5px;
+    padding: 5px;
+    border-radius: 999px;
+    cursor: pointer;
 
     &:hover,
     &:active {
       background: $inputBackground;
+    }
+
+    &.sound {
+      width: 30px;
+      line-height: 30px;
+      height: 30px;
+      padding: 0;
+      text-align: center;
+      display: inline-block;
+    }
+
+    &.skip {
+      float: right;
     }
   }
 }
