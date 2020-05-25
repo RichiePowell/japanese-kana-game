@@ -157,3 +157,8 @@ button {
   font-family: $fontFamily;
   outline: none;
 }
+
+/* Overide SweetAlert class that causes container box to lose central positioning */
+body.swal2-height-auto {
+  height: 100%!important;
+}
