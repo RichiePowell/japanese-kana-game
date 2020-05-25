@@ -6,6 +6,7 @@ import Hiragana from './data/Hiragana.js';
 import Katakana from './data/Katakana.js'; 
 import Character from './components/Character.js';
 import Input from './components/Input.js';
+import Controls from './components/Controls.js';
 import './App.scss';
 
 /* Add FontAwesome icons via library */
