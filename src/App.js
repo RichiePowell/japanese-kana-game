@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 /* Third party imports */
-import 'typeface-kaushan-script';
+import WebFont from 'webfontloader';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
 import SweetAlert from 'sweetalert2-react';
@@ -16,6 +16,13 @@ import Katakana from './data/Katakana.js';
 
 /* Add FontAwesome icons via library */
 library.add(faVolumeUp, faVolumeMute);
+
+/* Add web fonts */
+WebFont.load({
+  google: {
+    families: ['Kaushan Script', 'Source Sans Pro']
+  }
+});
 
 class App extends Component {
 
