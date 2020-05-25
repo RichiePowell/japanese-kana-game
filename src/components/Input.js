@@ -11,10 +11,6 @@ class Input extends Component {
     e.currentTarget.reset();
   }
 
-  componentDidMount () {
-    this.answer.current.focus();
-  }
-
   render() {
     return (
       <form
@@ -28,6 +24,7 @@ class Input extends Component {
           className="answer"
           placeholder="Enter answer..."
           maxLength="3"
+          autoFocus="true"
         />
         <input
           type="submit"
