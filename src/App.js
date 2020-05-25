@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'typeface-kaushan-script';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
+import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
 import Hiragana from './data/Hiragana.js';
 import Katakana from './data/Katakana.js'; 
 import Character from './components/Character.js';
