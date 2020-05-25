@@ -35,20 +35,6 @@ class Input extends Component {
           value="Check"
           className="submit"
         />
-        <button
-          className="skip"
-          onClick={ () => this.props.toggleSound() }
-          type="button"
-        >
-          <FontAwesomeIcon icon={ this.props.sound ? 'volume-up' : 'volume-off' } />
-        </button>
-        <button
-          className="skip"
-          onClick={ () => this.props.loadNewCharacter() }
-          type="button"
-        >
-          Skip
-        </button>
       </form>
     )
   }
