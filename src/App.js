@@ -106,6 +106,11 @@ class App extends Component {
             sound={ this.state.sound }
             toggleSound={ this.toggleSound }
           />
+          <Controls
+            sound={ this.state.sound }
+            toggleSound={ this.toggleSound }
+            loadNewCharacter={ this.loadNewCharacter }
+          />
         </div>
       </div>
     );
