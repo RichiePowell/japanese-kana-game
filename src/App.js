@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import 'typeface-kaushan-script';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
-import Hiragana from './data/Hiragana.js';
-import Katakana from './data/Katakana.js'; 
+import Header from './components/Header.js';
 import Character from './components/Character.js';
 import Input from './components/Input.js';
 import Controls from './components/Controls.js';
@@ -85,18 +84,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <header className="header">
-            <h1>
-              Japanese
-              <span>Kana Practice</span>
-            </h1>
-            {/* <a
-              className="author"
-              href="https://richpowell.co.uk/"
-            >
-              By Rich Powell
-            </a> */}
-          </header>
+          <Header />
           <Character
             currentCharacter={ this.state.currentCharacter }
           />
