@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Character extends Component {
-  render() {
-    return (
-      <div className="character">
-        { this.props.currentCharacter }
-      </div>
-    )
-  }
+const Character = ({currentCharacter}) => {
+  return (
+    <div className="character">
+      { currentCharacter }
+    </div>
+  )
 }
 
 export default Character;
