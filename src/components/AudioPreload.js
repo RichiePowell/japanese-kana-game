@@ -4,10 +4,10 @@ const AudioPreload = () => {
   return (
     <div className="audio-preload">
       <audio preload="auto">
-        <source src="success.mp3" />
+        <source src="success.ogg" />
       </audio>
       <audio preload="auto">
-        <source src="error.mp3" />
+        <source src="error.ogg" />
       </audio>
     </div>
   );

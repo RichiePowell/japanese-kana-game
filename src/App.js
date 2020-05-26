@@ -30,6 +30,7 @@ class App extends Component {
 
   state = {
     characters: {},
+    answers: {},
     currentCharacter: '',
     currentAnswer: '',
     sound: true,
@@ -38,11 +39,10 @@ class App extends Component {
 
   checkAnswer = (answer) => {
     const currentAnswer = this.state.currentAnswer;
-    const currentCharacter = this.state.currentCharacter;
     const userAnswer = answer.toLowerCase().trim();
-    const successAudioFile = "success.mp3";
+    const successAudioFile = "success.ogg";
+    const errorAudioFile = "error.ogg";
     const successAudio = new Audio(successAudioFile);
-    const errorAudioFile = "error.mp3";
     const errorAudio = new Audio(errorAudioFile);
 
     /* If the answer is blank, do nothing */
