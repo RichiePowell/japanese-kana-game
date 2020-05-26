@@ -46,12 +46,13 @@ class App extends Component {
       return false;
     }
 
+    /* If answer is wrong */
     if(
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
       || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
     ) {
       this.wrongAnswer(currentCharacter, currentAnswer);
-    } else {
+    } else { /* Else, if it's right*/
       this.rightAnswer();
     }
   }
@@ -67,12 +68,12 @@ class App extends Component {
     this.loadNewCharacter();
   }
 
-  wrongAnswer = (character, answer) => {
+  wrongAnswer = () => {
     const errorAudioFile = "error.mp3";
 
-    this.setState(prevState => ({
+    this.setState({
       showWrongAnswerDialog: true
-    }));
+    });
 
     if(this.state.sound) {
       const errorAudio = new Audio(errorAudioFile);
