@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 /* Third party imports */
 import WebFont from 'webfontloader';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons'
+import { faVolumeUp, faVolumeMute, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SweetAlert from 'sweetalert2-react';
 /* Components */
 import Header from './components/Header.js';
@@ -15,7 +16,7 @@ import Hiragana from './data/Hiragana.js';
 import Katakana from './data/Katakana.js';
 
 /* Add FontAwesome icons via library */
-library.add(faVolumeUp, faVolumeMute);
+library.add(faVolumeUp, faVolumeMute, faSpinner);
 
 /* Add web fonts */
 WebFont.load({
@@ -147,6 +148,7 @@ class App extends Component {
             }
           />
         </div>
+        <FontAwesomeIcon icon="spinner" spin className="loading" />
       </div>
     );
   }
