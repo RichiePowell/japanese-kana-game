@@ -40,8 +40,12 @@ class App extends Component {
     const currentAnswer = this.state.currentAnswer;
     const currentCharacter = this.state.currentCharacter;
     const userAnswer = answer.toLowerCase().trim();
+    const successAudioFile = "success.mp3";
+    const successAudio = new Audio(successAudioFile);
+    const errorAudioFile = "error.mp3";
+    const errorAudio = new Audio(errorAudioFile);
 
-    /* If the user's answer is blank */
+    /* If the answer is blank, do nothing */
     if(userAnswer === '') {
       return false;
     }
@@ -51,33 +55,13 @@ class App extends Component {
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
       || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
     ) {
-      this.wrongAnswer(currentCharacter, currentAnswer);
-    } else { /* Else, if it's right*/
-      this.rightAnswer();
-    }
-  }
-
-  rightAnswer = () => {
-    const successAudioFile = "success.mp3";
-
-    if(this.state.sound) {
-      const successAudio = new Audio(successAudioFile);
-      successAudio.play();
-    }
-
-    this.loadNewCharacter();
-  }
-
-  wrongAnswer = () => {
-    const errorAudioFile = "error.mp3";
-
-    this.setState({
-      showWrongAnswerDialog: true
-    });
-
-    if(this.state.sound) {
-      const errorAudio = new Audio(errorAudioFile);
       errorAudio.play();
+      this.setState({
+        showWrongAnswerDialog: true
+      });
+    } else { /* Else, if it's right*/
+      successAudio.play();
+      this.loadNewCharacter();
     }
   }
   
