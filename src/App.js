@@ -10,6 +10,7 @@ import Header from './components/Header.js';
 import Character from './components/Character.js';
 import Input from './components/Input.js';
 import Controls from './components/Controls.js';
+import AudioPreload from './components/AudioPreload.js';
 import './App.scss';
 /* Character data */
 import Hiragana from './data/Hiragana.js';
@@ -149,6 +150,7 @@ class App extends Component {
           />
         </div>
         <FontAwesomeIcon icon="spinner" spin className="loading" />
+        <AudioPreload />
       </div>
     );
   }
