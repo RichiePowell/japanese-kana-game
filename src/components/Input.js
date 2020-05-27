@@ -24,7 +24,7 @@ class Input extends Component {
           className="answer"
           placeholder="Enter answer..."
           maxLength="3"
-          autoFocus="true"
+          autoFocus={true}
         />
         <input
           type="submit"
