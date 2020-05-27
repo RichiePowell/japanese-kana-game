@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 /* Third party imports */
 import WebFont from 'webfontloader';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faVolumeUp, faVolumeMute, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SweetAlert from 'sweetalert2-react';
 /* Components */
 import Header from './components/Header.js';
+import Score from './components/Score.js';
 import Character from './components/Character.js';
 import Input from './components/Input.js';
 import Controls from './components/Controls.js';
@@ -17,7 +18,7 @@ import Hiragana from './data/Hiragana.js';
 import Katakana from './data/Katakana.js';
 
 /* Add FontAwesome icons via library */
-library.add(faVolumeUp, faVolumeMute, faSpinner);
+library.add(faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes);
 
 /* Add web fonts */
 WebFont.load({
@@ -33,6 +34,9 @@ class App extends Component {
     answers: {},
     currentCharacter: '',
     currentAnswer: '',
+    correctAnswers: 0,
+    wrongAnswers: 0,
+    lastAnswerWas: '',
     sound: true,
     kana: 'both'
   };
@@ -55,12 +59,24 @@ class App extends Component {
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
       || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
     ) {
-      errorAudio.play();
-      this.setState({
-        showWrongAnswerDialog: true
-      });
+      if(this.state.sound) {
+        errorAudio.play();
+      }
+      
+      this.setState(prevState => ({
+        showWrongAnswerDialog: true,
+        wrongAnswers: prevState.wrongAnswers + 1,
+        lastAnswerWas: "wrong"
+      }));
     } else { /* Else, if it's right*/
-      successAudio.play();
+      if(this.state.sound) {
+        successAudio.play();
+      }
+
+      this.setState(prevState => ({
+        correctAnswers: prevState.correctAnswers + 1,
+        lastAnswerWas: "correct"
+      }));
       this.loadNewCharacter();
     }
   }
@@ -107,6 +123,12 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <Header />
+          <Score
+            key={ ( this.state.correctAnswers + this.state.wrongAnswers ) }
+            lastAnswerWas={ this.state.lastAnswerWas }
+            correctAnswers={ this.state.correctAnswers }
+            wrongAnswers={ this.state.wrongAnswers }
+          />
           <Character
             currentCharacter={ this.state.currentCharacter }
           />

@@ -42,6 +42,7 @@ a {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   transition: 1s all ease;
+  position: relative;
 }
 
 .header {
@@ -69,6 +70,50 @@ a {
   .author {
     color: #cc5555;
     font-size: 14px;
+  }
+}
+
+.scores {
+  width: 100%;
+
+  > div {
+    position: absolute;
+    font-size: 18px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    font-weight: 700;
+    border-radius: 999px;
+    transition: .2s all ease;
+    opacity: .5;
+
+    &.active {
+      animation: pulse 0.3s ease;
+    }
+
+    svg {
+      color: #999999;
+      display: block;
+      font-size: 16px;
+    }
+  }
+
+  .correct {
+    color: green;
+
+    svg {
+      color: green;
+    }
+  }
+
+  .wrong {
+    right: 30px;
+    color: $mainColor;
+
+    svg {
+      color: $mainColor;
+    }
   }
 }
 
@@ -190,6 +235,17 @@ body.swal2-height-auto {
   }
 
   .loading {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: none;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.75);
     opacity: 1;
   }
 }
