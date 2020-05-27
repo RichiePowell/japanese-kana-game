@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 /* Third party imports */
+import { shuffle } from 'lodash';
 import WebFont from 'webfontloader';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -97,7 +98,7 @@ class App extends Component {
 
   loadNewCharacter = () => {
     const keys = Object.keys(this.state.characters);
-    const character = keys[keys.length * Math.random() << 0];
+    const character = shuffle(keys)[0];
     const answer = this.state.characters[character];
     const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer;
     
