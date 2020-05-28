@@ -12,11 +12,11 @@ class AnswerChoices extends Component {
 
     return (
       <form onSubmit={ this.handleSubmit } className="answer-options">
-        {answerOptions && shuffle(answerOptions).map( (answer) => {
+        {answerOptions && shuffle(answerOptions).map( (answer, index) => {
           answer = Array.isArray(answer) ? answer[0] : answer;
           return (
           <input
-            key={ answer }
+            key={ answer + index }
             type="submit"
             name="answer"
             value={ answer }
