@@ -1,5 +1,5 @@
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Score = ( {correctAnswers, wrongAnswers, lastAnswerWas }) => {
   return (
@@ -7,14 +7,14 @@ const Score = ( {correctAnswers, wrongAnswers, lastAnswerWas }) => {
       <div
         className={ "correct" + (lastAnswerWas === 'correct' ? ' active' : '') }
       >
-        {/* <FontAwesomeIcon icon="check" /> */}
-        { correctAnswers }
+        <div class="title">Right</div>
+        <span>{ correctAnswers }</span>
       </div>
       <div
         className={ "wrong" + (lastAnswerWas === 'wrong' ? ' active' : '') }
       >
-        {/* <FontAwesomeIcon icon="times" /> */}
-        { wrongAnswers }
+        <div class="title">Wrong</div>
+        <span>{ wrongAnswers }</span>
       </div>
     </div>
   );

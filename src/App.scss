@@ -81,15 +81,22 @@ a {
     position: absolute;
     font-size: 18px;
     text-align: center;
-    line-height: 30px;
-    height: 30px;
-    width: 30px;
-    font-weight: 700;
-    border-radius: 999px;
     transition: .2s all ease;
     opacity: .5;
 
-    &.active {
+    span {
+      display: block;
+      font-weight: bold;
+    }
+
+    .title {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    &.active span {
       animation: pulse 0.3s ease;
     }
 
@@ -100,19 +107,14 @@ a {
     }
   }
 
-  .correct {
+  .correct span {
     color: green;
-
-    svg {
-      color: green;
-    }
   }
 
   .wrong {
     right: 30px;
-    color: $mainColor;
 
-    svg {
+    span {
       color: $mainColor;
     }
   }
@@ -273,7 +275,7 @@ html body.swal2-height-auto {
     opacity: 0.5;
   }
   100% {
-    transform: scale(1.75);
+    transform: scale(2);
     opacity: 1;
   }
 }
