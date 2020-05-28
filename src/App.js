@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SweetAlert from 'sweetalert2-react';
+import { isMobile, isTablet } from 'react-device-detect';
 /* Components */
 import Header from './components/Header.js';
 import Score from './components/Score.js';
@@ -39,7 +40,7 @@ class App extends Component {
     correctAnswers: 0,
     wrongAnswers: 0,
     lastAnswerWas: '',
-    keyboardMode: true,
+    keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
     kana: 'both'
   };
