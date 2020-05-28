@@ -169,18 +169,32 @@ a {
   }
 }
 
+.answer-options {
+  text-align: center;
+
+  input {
+    padding: 13px 15px;
+    background: $inputBackground;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+}
+
 .controls {
   button,
   select {
-    border: 1px #ccc solid;
+    border: 1px $inputBackground solid;
     background: none;
     transition: 0.2s all ease;
     border-radius: 5px;
     line-height: 30px;
     height: 30px;
-    padding: 0 5px;
-    border-radius: 999px;
-    cursor: pointer;
+    padding: 0 10px;
+    float: right;
 
     &:hover,
     &:active {
@@ -193,10 +207,12 @@ a {
       padding: 0;
       text-align: center;
       display: inline-block;
+      border-radius: 999px;
+      float: none;
     }
 
     &.kana{
-      float: right;
+      margin-left: 10px;
     }
   }
 }

@@ -33,11 +33,13 @@ class App extends Component {
   state = {
     characters: {},
     answers: {},
+    possibleAnswers: [],
     currentCharacter: '',
     currentAnswer: '',
     correctAnswers: 0,
     wrongAnswers: 0,
     lastAnswerWas: '',
+    keyboardMode: true,
     sound: true,
     kana: 'both'
   };
@@ -87,6 +89,12 @@ class App extends Component {
       sound: !prevState.sound
     }));
   }
+  
+  toggleInput = () => {
+    this.setState(prevState => ({
+      keyboardMode: !prevState.keyboardMode
+    }));
+  }
 
   loadKana = () => {
     this.setState( prevState => ({
@@ -97,15 +105,23 @@ class App extends Component {
   }
 
   loadNewCharacter = () => {
-    const keys = Object.keys(this.state.characters);
-    const character = shuffle(keys)[0];
-    const answer = this.state.characters[character];
-    const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer;
+    /* Get a new character */
+    const shuffledCharacters = shuffle(Object.keys(this.state.characters)); // Shuffle the kana characters
+    const character = shuffledCharacters[0]; // Grab the first one
+    const answer = this.state.characters[character]; // Grab the answer
+    const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer; // Make answer printable, join with "or" if it's an array (multiple answers)
+
+    /* Get wrong answers */
+    const answerOptions = []
+    shuffledCharacters.slice(0, 5).forEach( char => {
+      answerOptions.push(this.state.characters[char]);
+    });
     
     this.setState({
       currentCharacter: character,
       currentAnswer: answer,
-      currentAnswerPrintable: answerPrintable
+      currentAnswerPrintable: answerPrintable,
+      answerOptions: answerOptions
     });
 
     return character;
@@ -136,12 +152,13 @@ class App extends Component {
           <Input
             loadNewCharacter={ this.loadNewCharacter }
             checkAnswer={ this.checkAnswer }
-            sound={ this.state.sound }
-            toggleSound={ this.toggleSound }
+            answerOptions={ this.state.answerOptions }
+            keyboardMode={ this.state.keyboardMode }
           />
           <Controls
             sound={ this.state.sound }
             toggleSound={ this.toggleSound }
+            toggleInput={ this.toggleInput }
             loadKana={ this.loadKana }
             handleKanaChange={ this.handleKanaChange }
             loadNewCharacter={ this.loadNewCharacter }
