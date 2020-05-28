@@ -181,6 +181,17 @@ a {
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    transition: 0.2s all ease;
+
+    &:hover {
+      background: darken($inputBackground, 10);
+    }
+
+    &:active {
+      background: $mainColor;
+      color: $white;
+      transform: scale(0.9);
+    }
   }
 }
 
