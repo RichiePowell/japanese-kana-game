@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AnswerInput from './AnswerInput.js';
-import AnswerChoices from './AnswerChoices.js';
+import AnswerInput from './AnswerInput';
+import AnswerChoices from './AnswerChoices';
 
 class Input extends Component {
   render() {

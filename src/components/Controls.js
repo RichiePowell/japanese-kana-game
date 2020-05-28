@@ -1,6 +1,6 @@
 import React from 'react';
-import ChangeKana from './controls/ChangeKana.js';
-import Audio from './controls/Audio.js';
+import ChangeKana from './controls/ChangeKana';
+import Audio from './controls/Audio';
 
 const Controls = ({ sound, toggleSound, handleKanaChange, toggleInput }) => {
   return (

@@ -8,16 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SweetAlert from 'sweetalert2-react';
 import { isMobile, isTablet } from 'react-device-detect';
 /* Components */
-import Header from './components/Header.js';
-import Score from './components/Score.js';
-import Character from './components/Character.js';
-import Input from './components/Input.js';
-import Controls from './components/Controls.js';
-import AudioPreload from './components/AudioPreload.js';
+import Header from './components/Header';
+import Score from './components/Score';
+import Character from './components/Character';
+import Input from './components/Input';
+import Controls from './components/Controls';
+import AudioPreload from './components/AudioPreload';
 import './App.scss';
 /* Character data */
-import Hiragana from './data/Hiragana.js';
-import Katakana from './data/Katakana.js';
+import Hiragana from './data/Hiragana';
+import Katakana from './data/Katakana';
 
 /* Add FontAwesome icons via library */
 library.add(faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes);
