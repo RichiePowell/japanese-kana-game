@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 /* Third party imports */
-import { shuffle } from 'lodash'
+import { shuffle, remove } from 'lodash'
 import WebFont from 'webfontloader'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -108,7 +108,12 @@ class App extends Component {
   loadNewCharacter = () => {
     /* Get a new character */
     const shuffledCharacters = shuffle(Object.keys(this.state.characters)); // Shuffle the kana characters
-    const character = shuffledCharacters[0]; // Grab the first one
+    
+    if(this.state.currentCharacter.length) { // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of character's that's being loaded so it doesn't appear twice in a row
+      shuffledCharacters.splice(shuffledCharacters.indexOf(this.state.currentCharacter), 1)
+    }
+
+    const character = shuffledCharacters.shift(); // Grab the first one
     const answer = this.state.characters[character]; // Grab the answer
     const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer; // Make answer printable, join with "or" if it's an array (multiple answers)
 
