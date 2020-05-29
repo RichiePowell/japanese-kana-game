@@ -35,12 +35,12 @@ export class Provider extends Component {
     const successAudio = new Audio(successAudioFile);
     const errorAudio = new Audio(errorAudioFile);
 
-    /* If the answer is blank, do nothing */
+    // If the answer is blank, do nothing
     if(userAnswer === '') {
       return false;
     }
 
-    /* If answer is wrong */
+    // If answer is wrong
     if(
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
       || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
