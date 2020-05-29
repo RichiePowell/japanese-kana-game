@@ -1,16 +1,21 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react'
+import { Consumer } from './../context'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Audio = ({sound, toggleSound}) => {
+const Audio = () => {
   return (
-    <button
-      className="sound"
-      onClick={ toggleSound }
-      type="button"
-    >
-      <FontAwesomeIcon icon={ sound ? 'volume-up' : 'volume-mute' } />
-    </button>
-  );
+    <Consumer>
+      { ({ sound, actions }) => (
+        <button
+          className="sound"
+          onClick={ actions.toggleSound }
+          type="button"
+        >
+          <FontAwesomeIcon icon={ sound ? 'volume-up' : 'volume-mute' } />
+        </button>
+      )}
+    </Consumer>
+  )
 }
 
-export default Audio;
+export default Audio
