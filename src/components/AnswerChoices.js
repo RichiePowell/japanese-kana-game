@@ -1,10 +1,9 @@
 import React from 'react';
-import { shuffle } from 'lodash';
 
 const AnswerChoices = ({ answerOptions, checkAnswer }) => {
   return (
     <div className="answer-options">
-      {answerOptions && shuffle(answerOptions).map( (answer, index) => {
+      {answerOptions && answerOptions.map( (answer, index) => {
         answer = Array.isArray(answer) ? answer[0] : answer;
         return (
         <button

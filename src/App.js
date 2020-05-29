@@ -122,7 +122,7 @@ class App extends Component {
       currentCharacter: character,
       currentAnswer: answer,
       currentAnswerPrintable: answerPrintable,
-      answerOptions: answerOptions
+      answerOptions: shuffle(answerOptions)
     });
 
     return character;
