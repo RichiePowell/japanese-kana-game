@@ -82,17 +82,17 @@ a {
     font-size: 18px;
     text-align: center;
     transition: .2s all ease;
-    opacity: .5;
 
     span {
       display: block;
       font-weight: bold;
+      opacity: 0.5;
     }
 
     .title {
       text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 12px;
+      letter-spacing: 1px;
+      font-size: 10px;
       margin-bottom: 3px;
     }
 
@@ -130,7 +130,7 @@ a {
   width: 250px;
   margin: auto;
   vertical-align: middle;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   user-select: none;
   text-align: center;
 }
@@ -144,21 +144,21 @@ a {
     border: none;
     width: 100%;
     display: block;
-    padding: 10px;
+    padding: 10px 20px;
     font-weight: 300;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 999px;
     margin-bottom: 15px;
   }
   
   .submit {
-    background: $mainColor;
+    background: darken($inputBackground, 30);
     position: absolute;
-    right: 8px;
-    top: 8px;
+    right: 7px;
+    top: 7px;
     color: $white;
     border: none;
-    border-radius: 5px;
+    border-radius: 999px;
     padding: 10px 15px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -166,7 +166,7 @@ a {
     transition: 0.1s all ease;
 
     &:hover {
-      background: $mainColorHover;
+      background: darken($inputBackground, 50);
     }
   }
 }
@@ -208,6 +208,9 @@ a {
     height: 30px;
     padding: 0 10px;
     float: right;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 
     &:hover,
     &:active {

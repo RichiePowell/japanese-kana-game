@@ -6,7 +6,7 @@ const ChangeKana = ({handleKanaChange}) => {
       onChange={ (e) => handleKanaChange(e.target.value) }
       className="kana"
     >
-      <option value="both">Both</option>
+      <option value="both">All Kana</option>
       <option value="hiragana">Hiragana</option>
       <option value="katakana">Katakana</option>
     </select>
