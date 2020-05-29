@@ -1,31 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { shuffle } from 'lodash';
 
-class AnswerChoices extends Component {
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-  }
-
-  render() {
-    const { answerOptions, checkAnswer } = this.props;
-
-    return (
-      <form onSubmit={ this.handleSubmit } className="answer-options">
-        {answerOptions && shuffle(answerOptions).map( (answer, index) => {
-          answer = Array.isArray(answer) ? answer[0] : answer;
-          return (
-          <input
-            key={ answer + index }
-            type="submit"
-            name="answer"
-            value={ answer }
-            onClick={ () => checkAnswer(answer) }
-          />
-        )})}
-      </form>
-    );
-  }
+const AnswerChoices = ({ answerOptions, checkAnswer }) => {
+  return (
+    <div className="answer-options">
+      {answerOptions && shuffle(answerOptions).map( (answer, index) => {
+        answer = Array.isArray(answer) ? answer[0] : answer;
+        return (
+        <button
+          key={ answer + index }
+          type="button"
+          name="answer"
+          value={ answer }
+          onClick={ () => checkAnswer(answer) }
+        >{ answer }</button>
+      )})}
+    </div>
+  );
 }
 
 export default AnswerChoices;
