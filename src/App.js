@@ -20,44 +20,41 @@ import AudioPreload from './components/AudioPreload'
 import './App.scss'
 
 /* Add FontAwesome icons via library */
-library.add(faVolumeUp, faVolumeMute, faSpinner);
+library.add(faVolumeUp, faVolumeMute, faSpinner)
 
 /* Add web fonts */
 WebFont.load({
   google: {
     families: ['Kaushan Script', 'Source Sans Pro']
   }
-});
+})
 
-export const App = () => {
-  return (
-    <div className="App">
+export const App = () =>
+  <div className="App">
 
-      <Consumer>
-        { context => (
-          <div className="container">
-            <Header />
-            <Score key={ ( context.correctAnswers + context.wrongAnswers ) } />
-            <Character />
-            <Input />
-            <Controls />
-            <SweetAlert
-              show={context.showWrongAnswerDialog}
-              title={context.currentCharacter + " is " +context.currentAnswerPrintable}
-              type="error"
-              onConfirm={() => {
-                  context.actions.toggleWrongAnswerDialog();
-                  context.actions.loadNewCharacter();
-                }
+    <Consumer>
+      { context => (
+        <div className="container">
+          <Header />
+          <Score key={ ( context.correctAnswers + context.wrongAnswers ) } />
+          <Character />
+          <Input />
+          <Controls />
+          <SweetAlert
+            show={context.showWrongAnswerDialog}
+            title={context.currentCharacter + " is " +context.currentAnswerPrintable}
+            type="error"
+            onConfirm={() => {
+                context.actions.toggleWrongAnswerDialog();
+                context.actions.loadNewCharacter();
               }
-            />
-          </div>
-        )}
-      </Consumer>
-      <FontAwesomeIcon icon="spinner" spin className="loading" />
-      <AudioPreload />
-    </div>
-  )
-}
+            }
+          />
+        </div>
+      )}
+    </Consumer>
+    <FontAwesomeIcon icon="spinner" spin className="loading" />
+    <AudioPreload />
+  </div>
 
 export default App
