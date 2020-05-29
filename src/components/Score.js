@@ -6,13 +6,13 @@ const Score = ( {correctAnswers, wrongAnswers, lastAnswerWas }) => {
       <div
         className={ "correct" + (lastAnswerWas === 'correct' ? ' active' : '') }
       >
-        <div class="title">Right</div>
+        <div className="title">Right</div>
         <span>{ correctAnswers }</span>
       </div>
       <div
         className={ "wrong" + (lastAnswerWas === 'wrong' ? ' active' : '') }
       >
-        <div class="title">Wrong</div>
+        <div className="title">Wrong</div>
         <span>{ wrongAnswers }</span>
       </div>
     </div>
