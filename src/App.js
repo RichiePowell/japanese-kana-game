@@ -117,9 +117,9 @@ class App extends Component {
     const answer = this.state.characters[character]; // Grab the answer
     const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer; // Make answer printable, join with "or" if it's an array (multiple answers)
 
-    /* Get wrong answers */
-    const answerOptions = []
-    shuffledCharacters.slice(0, 5).forEach( char => {
+    /* Get answer options; one right answer and some wrong answers */
+    const answerOptions = [answer]
+    shuffledCharacters.slice(0, 4).forEach( char => {
       answerOptions.push(this.state.characters[char]);
     });
     
