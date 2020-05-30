@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
-import AnswerInput from './AnswerInput';
-import AnswerChoices from './AnswerChoices';
+import React from 'react'
+import { Consumer } from './context'
+import InputKeyboard from './InputKeyboard'
+import InputChoices from './InputChoices'
 
-class Input extends Component {
-  render() {
-    const { keyboardMode, checkAnswer, answerOptions } = this.props;
-
-    return (
+const Input = () =>
+  <Consumer>
+    { ({ keyboardMode }) => (
       <div className="answers">
         { keyboardMode ?
-          <AnswerInput checkAnswer={ checkAnswer } />
+          <InputKeyboard />
         :
-          <AnswerChoices
-            answerOptions={ answerOptions }
-            checkAnswer={ checkAnswer }
-          />
+          <InputChoices />
         }
       </div>
-    )
-  }
-}
+    )}
+  </Consumer>
 
-export default Input;
+export default Input

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 /* Third party imports */
 import { shuffle } from 'lodash'
 import { isMobile, isTablet } from 'react-device-detect'
-import { BrowserRouter, Route } from 'react-router-dom'
 
 /* Character data */
 import Hiragana from './../../data/Hiragana'

@@ -1,20 +1,19 @@
-import React from 'react';
-import ChangeKana from './controls/ChangeKana';
-import Audio from './controls/Audio';
+import React from 'react'
+import { Consumer } from './context'
+import ChangeKana from './controls/ChangeKana'
+import Audio from './controls/Audio'
 
-const Controls = ({ sound, toggleSound, handleKanaChange, toggleInput }) => {
-  return (
-    <div className="controls">
-      <Audio
-        sound={sound}
-        toggleSound={toggleSound}
-      />
-      <ChangeKana handleKanaChange={handleKanaChange} />
-      <button
-        onClick={toggleInput}
-      >Toggle input mode</button>
-    </div>
-  );
-}
+const Controls = () =>
+  <Consumer>
+    { ({ actions }) => (
+      <div className="controls">
+        <Audio />
+        <ChangeKana />
+        <button
+          onClick={ actions.toggleInput }
+        >Toggle input mode</button>
+      </div>
+    )}
+  </Consumer>
 
-export default Controls;
+export default Controls
