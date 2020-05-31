@@ -1,22 +1,11 @@
 import React from 'react'
-
-/* Third Party */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import SweetAlert from 'sweetalert2-react'
+import { Consumer } from './components/context'
 import WebFont from 'webfontloader'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faVolumeUp, faVolumeMute, faSpinner } from '@fortawesome/free-solid-svg-icons'
-
-/* Components */
-import { Consumer } from './components/context'
-import Header from './components/Header'
-import Score from './components/Score'
-import Character from './components/Character'
-import Input from './components/Input'
-import Controls from './components/Controls'
-import AudioPreload from './components/AudioPreload'
-
-/* Styling */
+import Game from './components/Game'
+import StartScreen from './components/StartScreen'
 import './App.scss'
 
 /* Add FontAwesome icons via library */
@@ -29,32 +18,21 @@ WebFont.load({
   }
 })
 
-export const App = () =>
-  <div className="App">
-
-    <Consumer>
-      { context => (
+const App = () =>
+  <Consumer>
+    { ({ gameStart }) => (
+      <div className="App">
         <div className="container">
-          <Header />
-          <Score key={ ( context.correctAnswers + context.wrongAnswers ) } />
-          <Character />
-          <Input />
-          <Controls />
-          <SweetAlert
-            show={context.showWrongAnswerDialog}
-            title={context.currentCharacter + " is " +context.currentAnswerPrintable}
-            type="error"
-            onConfirm={() => {
-                context.actions.toggleWrongAnswerDialog();
-                context.actions.loadNewCharacter();
-              }
-            }
-          />
+          { gameStart ?
+            <Game />
+            :
+            <StartScreen />
+          }
         </div>
-      )}
-    </Consumer>
-    <FontAwesomeIcon icon="spinner" spin className="loading" />
-    <AudioPreload />
-  </div>
+
+        <FontAwesomeIcon icon="spinner" spin className="loading" />
+      </div>
+      ) }
+  </Consumer>
 
 export default App

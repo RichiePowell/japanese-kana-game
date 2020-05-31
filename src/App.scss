@@ -45,6 +45,17 @@ a {
   position: relative;
 }
 
+.start-screen {
+  div {
+    text-align: center;
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .header {
   margin-bottom: 30px;
   user-select: none;

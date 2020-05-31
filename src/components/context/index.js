@@ -15,6 +15,7 @@ export class Provider extends Component {
     characters: {},
     answers: {},
     answerOptions: [],
+    gameStart: false,
     currentCharacter: '',
     currentAnswer: '',
     currentAnswerPrintable: '',
@@ -66,22 +67,12 @@ export class Provider extends Component {
       this.loadNewCharacter();
     }
   }
-  
-  toggleSound = () => {
-    this.setState(prevState => ({
-      sound: !prevState.sound
-    }));
-  }
-  
-  toggleInput = () => {
-    this.setState(prevState => ({
-      keyboardMode: !prevState.keyboardMode
-    }));
-  }
 
-  toggleWrongAnswerDialog = () => {
-    this.setState({ showWrongAnswerDialog: false });
-  }
+  startGame = () => { this.setState(prevState => ({ gameStart: !prevState.gameStart })) }
+  toggleSound = () => { this.setState(prevState => ({ sound: !prevState.sound })) }
+  toggleInput = () => { this.setState(prevState => ({keyboardMode: !prevState.keyboardMode})) }
+  toggleWrongAnswerDialog = () => { this.setState({ showWrongAnswerDialog: false }) }
+  handleKanaChange = (kana) => { this.setState({ kana: kana }, this.loadKana) }
 
   loadKana = () => {
     this.setState( prevState => ({
@@ -119,10 +110,6 @@ export class Provider extends Component {
     return character;
   }
 
-  handleKanaChange = (kana) => {
-    this.setState({ kana: kana }, this.loadKana);
-  }
-
   componentDidMount() {
     this.loadKana();
   }
@@ -133,6 +120,7 @@ export class Provider extends Component {
         characters: this.state.characters,
         answers: this.state.answers,
         answerOptions: this.state.answerOptions,
+        gameStart: this.state.gameStart,
         currentCharacter: this.state.currentCharacter,
         currentAnswer: this.state.currentAnswer,
         currentAnswerPrintable: this.state.currentAnswerPrintable,
@@ -149,6 +137,7 @@ export class Provider extends Component {
           handleKanaChange: this.handleKanaChange,
           toggleSound: this.toggleSound,
           toggleInput: this.toggleInput,
+          startGame: this.startGame,
           toggleWrongAnswerDialog: this.toggleWrongAnswerDialog,
           checkAnswer: this.checkAnswer
         }
