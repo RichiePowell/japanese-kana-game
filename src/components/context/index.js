@@ -96,8 +96,8 @@ export class Provider extends Component {
     const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
     
     // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of characters that's being loaded so it doesn't appear twice in a row
-    if(this.state.currentCharacter.length > 0) {
-      shuffledCharacters.splice(shuffledCharacters.indexOf(characters), 1)
+    if(this.state.currentCharacter.length) {
+      shuffledCharacters.splice(shuffledCharacters.indexOf(this.state.currentCharacter), 1)
     }
 
     const character = shuffledCharacters.shift(); // Grab the first one
