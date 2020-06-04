@@ -83,20 +83,24 @@ export class Provider extends Component {
   }
 
   loadNewCharacter = () => {
-    const shuffledCharacters = shuffle(Object.keys(this.state.characters)); // Shuffle the kana characters
+    const characters = this.state.characters;
+    const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
     
-    if(this.state.currentCharacter.length) { // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of character's that's being loaded so it doesn't appear twice in a row
+    // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of characters that's being loaded so it doesn't appear twice in a row
+    if(this.state.currentCharacter.length) {
       shuffledCharacters.splice(shuffledCharacters.indexOf(this.state.currentCharacter), 1)
     }
 
     const character = shuffledCharacters.shift(); // Grab the first one
-    const answer = this.state.characters[character]; // Grab the answer
+    const answer = characters[character]; // Grab the answer
     const answerPrintable = Array.isArray(answer) ? answer.join(' or ') : answer; // Make answer printable, join with "or" if it's an array (multiple answers)
 
-    // Get answer options; one right answer and some wrong answers
+    // Get answer options; one right answer and some wrong answers while preventing duplicates from similar answers
     const answerOptions = [answer]
-    shuffledCharacters.slice(0, 4).forEach( char => {
-      answerOptions.push(this.state.characters[char]);
+    shuffledCharacters.slice(0, 10).forEach( char => {
+      if(answerOptions.length < 5 && answer !== characters[char]) {
+        answerOptions.push(characters[char]);
+      }
     });
     
     // Update the state with new character's data
