@@ -74,6 +74,7 @@ export class Provider extends Component {
   toggleWrongAnswerDialog = () => { this.setState({ showWrongAnswerDialog: false }) }
   handleKanaChange = (kana) => { this.setState({ kana: kana }, this.loadKana) }
 
+  // Loads the kana based on the current kana state
   loadKana = () => {
     this.setState( prevState => ({
       characters:
@@ -82,6 +83,7 @@ export class Provider extends Component {
     }), this.loadNewCharacter);
   }
 
+  // Loads a new character
   loadNewCharacter = () => {
     const characters = this.state.characters;
     const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
@@ -115,7 +117,7 @@ export class Provider extends Component {
   }
 
   componentDidMount() {
-    this.loadKana();
+    this.loadKana(); // When the app loads, load the kana into the state
   }
 
   render() {
