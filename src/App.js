@@ -15,6 +15,7 @@ import Character from './components/Character'
 import Input from './components/Input'
 import Controls from './components/Controls'
 import AudioPreload from './components/AudioPreload'
+import Timer from './components/Timer'
 
 /* Styling */
 import './App.scss'
@@ -39,10 +40,11 @@ export const App = () =>
           <Score key={ ( context.correctAnswers + context.wrongAnswers ) } />
           <Character />
           <Input />
+          <Timer timer={ context.timer } />
           <Controls />
           <SweetAlert
             show={context.showWrongAnswerDialog}
-            title={context.currentCharacter + " is " +context.currentAnswerPrintable}
+            title={`${context.currentCharacter} is ${context.currentAnswerPrintable}`}
             type="error"
             onConfirm={() => {
                 context.actions.toggleWrongAnswerDialog();

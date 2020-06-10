@@ -24,8 +24,37 @@ export class Provider extends Component {
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
     kana: 'both',
+    timer: 5,
+    timerIsOn: false,
+    mode: 'timerForEachAnswer',
     showWrongAnswerDialog: false
   };
+
+  startTimer = () => {
+    this.timerInterval = setInterval(() => this.timerTick(), 1000);
+  }
+
+  timerTick = () => {
+    if(!this.state.timerIsOn) return false;
+
+    if(this.state.timer > 0) {
+      this.setState( prev => ({
+        timer: prev.timer - 1
+      }))
+    } else {
+      clearInterval(this.timerInterval);
+    }
+
+    if(this.state.timer === 0) {
+      this.checkAnswer('wrong');
+    }
+  }
+
+  resetTimer = () => {
+    if(this.state.mode === 'timerForEachAnswer') {
+      this.setState({ timer: 5 });
+    }
+  }
 
   checkAnswer = (answer) => {
     const currentAnswer = this.state.currentAnswer;
@@ -36,18 +65,16 @@ export class Provider extends Component {
     const errorAudio = new Audio(errorAudioFile);
 
     // If the answer is blank, do nothing
-    if(userAnswer === '') {
-      return false;
-    }
+    if(userAnswer === '') return false;
 
     // If answer is wrong
     if(
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
       || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
     ) {
-      if(this.state.sound) {
-        errorAudio.play();
-      }
+
+      // If sound is turned on, play the error audio
+      if(this.state.sound) errorAudio.play();
       
       this.setState(prevState => ({
         showWrongAnswerDialog: true,
@@ -55,9 +82,9 @@ export class Provider extends Component {
         lastAnswerWas: "wrong"
       }));
     } else { /* Else, if it's right*/
-      if(this.state.sound) {
-        successAudio.play();
-      }
+
+      // If sound is turned on, play the success audio
+      if(this.state.sound) successAudio.play();
 
       this.setState(prevState => ({
         correctAnswers: prevState.correctAnswers + 1,
@@ -66,11 +93,9 @@ export class Provider extends Component {
       this.loadNewCharacter();
     }
   }
-  
+
   toggleSound = () => {
-    this.setState(prevState => ({
-      sound: !prevState.sound
-    }));
+    this.setState(prevState => ({ sound: !prevState.sound }));
   }
   
   toggleInput = () => {
@@ -81,6 +106,7 @@ export class Provider extends Component {
 
   toggleWrongAnswerDialog = () => {
     this.setState({ showWrongAnswerDialog: false });
+    this.resetTimer();
   }
 
   loadKana = () => {
@@ -129,6 +155,7 @@ export class Provider extends Component {
 
   componentDidMount() {
     this.loadKana();
+    this.startTimer();
   }
 
   render() {
@@ -146,6 +173,7 @@ export class Provider extends Component {
         keyboardMode: this.state.keyboardMode,
         sound: this.state.sound,
         kana: this.state.kana,
+        timer: this.state.timer,
         showWrongAnswerDialog: this.state.showWrongAnswerDialog,
         actions: {
           loadKana: this.loadKana,
