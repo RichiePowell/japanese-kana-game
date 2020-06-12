@@ -25,35 +25,24 @@ export class Provider extends Component {
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
     kana: 'both',
+    allowKanaChange: true,
     timer: 5,
-    timerIsOn: false,
-    mode: 'timerForEachAnswer',
+    timerKey: '',
+    mode: 'unlimited',
     showWrongAnswerDialog: false
   };
 
-  startTimer = () => {
-    this.timerInterval = setInterval(() => this.timerTick(), 1000);
-  }
-
-  timerTick = () => {
-    if(!this.state.timerIsOn) return false;
-
-    if(this.state.timer > 0) {
-      this.setState( prev => ({
-        timer: prev.timer - 1
-      }))
-    } else {
-      clearInterval(this.timerInterval);
-    }
-
-    if(this.state.timer === 0) {
-      this.checkAnswer('wrong');
-    }
-  }
-
-  resetTimer = () => {
-    if(this.state.mode === 'timerForEachAnswer') {
-      this.setState({ timer: 5 });
+  gameModes = {
+    'unlimited' : {
+      allowKanaChange: true
+    },
+    'timer' : {
+      timer: 30,
+      allowKanaChange: false
+    },
+    'timerForEachAnswer' : {
+      timer: 5,
+      allowKanaChange: false
     }
   }
 
@@ -77,9 +66,9 @@ export class Provider extends Component {
       // If sound is turned on, play the error audio
       if(this.state.sound) errorAudio.play();
       
-      this.setState(prevState => ({
+      this.setState(prev => ({
         showWrongAnswerDialog: true,
-        wrongAnswers: prevState.wrongAnswers + 1,
+        wrongAnswers: prev.wrongAnswers + 1,
         lastAnswerWas: "wrong"
       }));
     } else { /* Else, if it's right*/
@@ -87,30 +76,40 @@ export class Provider extends Component {
       // If sound is turned on, play the success audio
       if(this.state.sound) successAudio.play();
 
-      this.setState(prevState => ({
-        correctAnswers: prevState.correctAnswers + 1,
+      this.setState(prev => ({
+        correctAnswers: prev.correctAnswers + 1,
         lastAnswerWas: "correct"
       }));
       this.loadNewCharacter();
     }
   }
 
-  startGame = () => this.setState(prevState => ({ gameStart: !prevState.gameStart }))
-  toggleSound = () => this.setState(prevState => ({ sound: !prevState.sound }))
-  toggleInput = () => this.setState(prevState => ({keyboardMode: !prevState.keyboardMode}))
+  startGame = () => {
+    this.setState(prev => ({
+      gameStart: !prev.gameStart
+    }));
+  }
+
+  toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
+  toggleInput = () => this.setState(prev => ({keyboardMode: !prev.keyboardMode}))
   handleKanaChange = (kana) => this.setState({ kana: kana }, this.loadKana)
+  handleModeChange = (mode) => {
+    this.setState( {
+      mode: mode,
+      ...this.gameModes[mode]
+    } )
+  }
 
   toggleWrongAnswerDialog = () => {
     this.setState({ showWrongAnswerDialog: false });
-    this.resetTimer();
   }
 
   // Loads the kana based on the current kana state
   loadKana = () => {
-    this.setState( prevState => ({
+    this.setState( prev => ({
       characters:
-        (prevState.kana === 'both' ? {...Hiragana, ...Katakana} :
-        (prevState.kana === 'hiragana' ? Hiragana : Katakana))
+        (prev.kana === 'both' ? {...Hiragana, ...Katakana} :
+        (prev.kana === 'hiragana' ? Hiragana : Katakana))
     }), this.loadNewCharacter);
   }
 
@@ -141,7 +140,8 @@ export class Provider extends Component {
       currentCharacter: character,
       currentAnswer: answer,
       currentAnswerPrintable: answerPrintable,
-      answerOptions: shuffle(answerOptions)
+      answerOptions: shuffle(answerOptions),
+      timerKey: this.state.mode === 'timerForEachAnswer' ? character : this.state.timerKey // Reset the timer depending on the game mode
     });
 
     return character;
@@ -149,7 +149,6 @@ export class Provider extends Component {
 
   componentDidMount() {
     this.loadKana();
-    this.startTimer();
   }
 
   render() {
@@ -168,12 +167,16 @@ export class Provider extends Component {
         keyboardMode: this.state.keyboardMode,
         sound: this.state.sound,
         kana: this.state.kana,
+        allowKanaChange: this.state.allowKanaChange,
         timer: this.state.timer,
+        timerKey: this.state.timerKey,
+        mode: this.state.mode,
         showWrongAnswerDialog: this.state.showWrongAnswerDialog,
         actions: {
           loadKana: this.loadKana,
           loadNewCharacter: this.loadNewCharacter,
           handleKanaChange: this.handleKanaChange,
+          handleModeChange: this.handleModeChange,
           toggleSound: this.toggleSound,
           toggleInput: this.toggleInput,
           startGame: this.startGame,

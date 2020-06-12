@@ -6,7 +6,7 @@ const Audio = () =>
   <Consumer>
     { ({ sound, actions }) => (
       <button
-        className="sound"
+        className="sound input-control"
         onClick={ actions.toggleSound }
         type="button"
       >

@@ -6,8 +6,10 @@ import InputToggle from './controls/InputToggle'
 const Controls = () =>
   <div className="controls">
     <Audio />
-    <ChangeKana />
-    <InputToggle />
+    <div className="float-right">
+      <InputToggle />
+      <ChangeKana />
+    </div>
   </div>
 
 export default Controls

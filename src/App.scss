@@ -46,8 +46,7 @@ a {
 }
 
 .start-screen {
-  div {
-    text-align: center;
+   > div {
     margin-bottom: 15px;
 
     &:last-child {
@@ -76,11 +75,6 @@ a {
       right: 0;
       bottom: -5px;
     }
-  }
-
-  .author {
-    color: #cc5555;
-    font-size: 14px;
   }
 }
 
@@ -208,39 +202,48 @@ a {
   }
 }
 
-.controls {
-  button,
-  select {
-    border: 1px $inputBackground solid;
-    background: none;
-    transition: 0.2s all ease;
-    border-radius: 5px;
-    line-height: 30px;
-    height: 30px;
-    padding: 0 10px;
-    float: right;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.input-control {
+  border: 1px $inputBackground solid;
+  background: none;
+  transition: 0.2s all ease;
+  border-radius: 5px;
+  line-height: 30px;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &.alt {
+    background: $mainColor;
+    color: $white;
+    border-color: transparent;
 
     &:hover,
     &:active {
-      background: $inputBackground;
+      background: $mainColorHover;
     }
+  }
 
-    &.sound {
-      width: 30px;
-      height: 30px;
-      padding: 0;
-      text-align: center;
-      display: inline-block;
-      border-radius: 999px;
-      float: none;
-    }
+  &:hover,
+  &:active {
+    background: $inputBackground;
+  }
 
-    &.kana{
-      margin-left: 10px;
-    }
+  &.sound {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+    border-radius: 999px;
+    float: none;
+  }
+}
+
+.controls {
+  .kana {
+    margin-left: 10px;
   }
 }
 
@@ -292,4 +295,26 @@ html body.swal2-height-auto {
     transform: scale(2);
     opacity: 1;
   }
+}
+
+.float-right {
+  float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.start-block {
+  div {
+    display: inline-block;
+    width: 50%;
+  }
+}
+
+.countdown {
+  position: absolute;
+  margin-top: -265px;
+  left: 50%;
+  transform: translateX(-50%);
 }

@@ -3,16 +3,18 @@ import { Consumer } from './../context'
 
 const ChangeKana = () =>
   <Consumer>
-    { ({ kana, actions }) => (
-      <select
-        onChange={ (e) => actions.handleKanaChange(e.target.value) }
-        className="kana"
-        value={ kana }
-      >
-        <option value="both">All Kana</option>
-        <option value="hiragana">Hiragana</option>
-        <option value="katakana">Katakana</option>
-      </select>
+    { ({ kana, actions, allowKanaChange, gameStart }) => (
+      !gameStart || allowKanaChange ?
+        <select
+          onChange={ (e) => actions.handleKanaChange(e.target.value) }
+          className="kana input-control"
+          value={ kana }
+        >
+          <option value="both">All Kana</option>
+          <option value="hiragana">Hiragana</option>
+          <option value="katakana">Katakana</option>
+        </select>
+      : ''
     )}
   </Consumer>
 

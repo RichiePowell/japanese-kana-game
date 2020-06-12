@@ -11,6 +11,8 @@ import Character from './Character'
 import Input from './Input'
 import Controls from './Controls'
 import AudioPreload from './AudioPreload'
+// import Timer from './Timer'
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export const Game = () =>
   <>
@@ -20,6 +22,24 @@ export const Game = () =>
           <Header />
           <Score key={ ( context.correctAnswers + context.wrongAnswers ) } />
           <Character />
+          { context.mode === 'timer' || context.mode === 'timerForEachAnswer' ?
+            <div className="countdown">
+              <CountdownCircleTimer
+                isPlaying
+                key={context.timerKey}
+                size={250}
+                onComplete={() => {
+                  if(context.mode === 'timerForEachAnswer') {
+                    context.actions.checkAnswer('Omae wa moe shindeiru');
+                  }
+                }}
+                duration={ context.timer }
+                colors={[['#e67272']]}
+                trailColor="#c83232"
+              />
+            </div>
+            : ''
+          }
           <Input />
           <Controls />
           <SweetAlert
