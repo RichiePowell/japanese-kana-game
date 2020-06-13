@@ -24,7 +24,8 @@ export class Provider extends Component {
     lastAnswerWas: '',
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
-    kana: 'both',
+    kana: ['Hiragana', 'Katakana'],
+    availableKana: ['Hiragana', 'Katakana'],
     allowKanaChange: true,
     timer: 5,
     timerKey: '',
@@ -92,7 +93,21 @@ export class Provider extends Component {
 
   toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
   toggleInput = () => this.setState(prev => ({keyboardMode: !prev.keyboardMode}))
-  handleKanaChange = (kana) => this.setState({ kana: kana }, this.loadKana)
+  setKana = (kana) => this.setState({ kana: kana === 'all' ? this.state.availableKana : [kana] }, this.loadKana)
+  
+  toggleKana = (kana) => {
+    let newKana = this.state.kana;
+    if(!newKana.includes(kana)) {
+      newKana.push(kana);
+    } else if(newKana.length > 1) {
+      newKana.splice(newKana.indexOf(kana), 1);
+    }
+    
+    this.setState({
+      kana: newKana
+    }, this.loadKana)
+  }
+
   handleModeChange = (mode) => {
     this.setState( {
       mode: mode,
@@ -106,11 +121,27 @@ export class Provider extends Component {
 
   // Loads the kana based on the current kana state
   loadKana = () => {
-    this.setState( prev => ({
-      characters:
-        (prev.kana === 'both' ? {...Hiragana, ...Katakana} :
-        (prev.kana === 'hiragana' ? Hiragana : Katakana))
-    }), this.loadNewCharacter);
+
+    // Reset characters object 
+    this.setState({ characters: {} }, () => {
+        // Go through each selected kana
+        this.state.kana.forEach((kana) => {
+          let newCharacterSet = this.state.characters;
+
+          switch(kana) {
+            case 'Hiragana':
+              newCharacterSet = Object.assign(newCharacterSet, Hiragana)
+            break;
+            case 'Katakana':
+              newCharacterSet = Object.assign(newCharacterSet, Katakana)
+            break;
+            default:
+              return false;
+          }
+          
+          this.setState({ characters: newCharacterSet }, this.loadNewCharacter)
+        })
+      });
   }
 
   // Loads a new character
@@ -175,7 +206,8 @@ export class Provider extends Component {
         actions: {
           loadKana: this.loadKana,
           loadNewCharacter: this.loadNewCharacter,
-          handleKanaChange: this.handleKanaChange,
+          setKana: this.setKana,
+          toggleKana: this.toggleKana,
           handleModeChange: this.handleModeChange,
           toggleSound: this.toggleSound,
           toggleInput: this.toggleInput,

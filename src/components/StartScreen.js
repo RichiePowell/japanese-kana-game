@@ -1,7 +1,7 @@
 import React from 'react'
 import { Consumer } from './context'
 import Header from './Header'
-import ChangeKana from './controls/ChangeKana'
+import ChangeKana from './controls/start/ChangeKana'
 import SelectMode from './controls/SelectMode'
 
 export const StartScreen = () =>
@@ -10,10 +10,7 @@ export const StartScreen = () =>
       return (
         <div className="start-screen">
           <Header />
-          <div className="start-block">
-            <div>Kana to practice:</div>
-            <div><ChangeKana /></div>
-          </div>
+          <ChangeKana />
           <div className="start-block">
             <div>Select mode:</div>
             <div><SelectMode /></div>
