@@ -25,7 +25,10 @@ export class Provider extends Component {
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
     kana: ['Hiragana', 'Katakana'],
-    availableKana: ['Hiragana', 'Katakana'],
+    kanaData: {
+      'Hiragana' : Hiragana,
+      'Katakana' : Katakana
+    },
     allowKanaChange: true,
     timer: 5,
     timerKey: '',
@@ -85,16 +88,12 @@ export class Provider extends Component {
     }
   }
 
-  startGame = () => {
-    this.setState(prev => ({
-      gameStart: !prev.gameStart
-    }));
-  }
-
+  startGame = () => this.setState({ gameStart: true }, this.loadNewCharacter) // Set gameStart state to true and load a new character
   toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
   toggleInput = () => this.setState(prev => ({keyboardMode: !prev.keyboardMode}))
-  setKana = (kana) => this.setState({ kana: kana === 'all' ? this.state.availableKana : [kana] }, this.loadKana)
+  setKana = (kana) => this.setState({ kana: kana === 'all' ? Object.keys(this.state.kanaData) : [kana] }, this.loadKana) // Handles the changeKana select box
   
+  // Add or remove the passed kana set name to the kana array in the state
   toggleKana = (kana) => {
     let newKana = this.state.kana;
     if(!newKana.includes(kana)) {
@@ -103,16 +102,14 @@ export class Provider extends Component {
       newKana.splice(newKana.indexOf(kana), 1);
     }
     
-    this.setState({
-      kana: newKana
-    }, this.loadKana)
+    this.setState({ kana: newKana }, this.loadKana)
   }
 
   handleModeChange = (mode) => {
-    this.setState( {
+    this.setState({
       mode: mode,
       ...this.gameModes[mode]
-    } )
+    })
   }
 
   toggleWrongAnswerDialog = () => {
@@ -121,27 +118,12 @@ export class Provider extends Component {
 
   // Loads the kana based on the current kana state
   loadKana = () => {
-
-    // Reset characters object 
-    this.setState({ characters: {} }, () => {
-        // Go through each selected kana
-        this.state.kana.forEach((kana) => {
-          let newCharacterSet = this.state.characters;
-
-          switch(kana) {
-            case 'Hiragana':
-              newCharacterSet = Object.assign(newCharacterSet, Hiragana)
-            break;
-            case 'Katakana':
-              newCharacterSet = Object.assign(newCharacterSet, Katakana)
-            break;
-            default:
-              return false;
-          }
-          
-          this.setState({ characters: newCharacterSet }, this.loadNewCharacter)
-        })
-      });
+    // Create an empty object for new character set
+    let newCharacterSet = {};
+    // Go through each selected kana and insert it into the new character set object
+    this.state.kana.forEach((kana) => newCharacterSet = {...newCharacterSet, ...this.state.kanaData[kana]})
+    // Insert the new character set into the state
+    this.setState({ characters: newCharacterSet });
   }
 
   // Loads a new character

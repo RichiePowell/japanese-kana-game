@@ -6,7 +6,6 @@ class AudioPreload extends Component {
   }
 
   render() {
-    console.log('test');
     return (
       <>
         <audio preload="auto">
