@@ -89,6 +89,13 @@ export class Provider extends Component {
   }
 
   startGame = () => this.setState({ gameStart: true }, this.loadNewCharacter) // Set gameStart state to true and load a new character
+  endGame = () => {
+    this.setState({
+      gameStart: false,
+      correctAnswers: 0,
+      wrongAnswers: 0
+    })
+  }
   toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
   toggleInput = () => this.setState(prev => ({keyboardMode: !prev.keyboardMode}))
   setKana = (kana) => this.setState({ kana: kana === 'all' ? Object.keys(this.state.kanaData) : [kana] }, this.loadKana) // Handles the changeKana select box
@@ -194,6 +201,7 @@ export class Provider extends Component {
           toggleSound: this.toggleSound,
           toggleInput: this.toggleInput,
           startGame: this.startGame,
+          endGame: this.endGame,
           toggleWrongAnswerDialog: this.toggleWrongAnswerDialog,
           checkAnswer: this.checkAnswer
         }

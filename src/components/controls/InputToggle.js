@@ -1,11 +1,6 @@
 import React from 'react'
-import { Consumer } from './../context'
 
-const InputToggle = () =>
-  <Consumer>
-    { ({ actions }) => (
-      <button className="input-control" onClick={ actions.toggleInput }>Toggle input</button>
-    )}
-  </Consumer>
+const InputToggle = ({actions}) =>
+  <button className="input-control" onClick={ actions.toggleInput }>Toggle input</button>
 
 export default InputToggle
