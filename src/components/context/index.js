@@ -87,7 +87,7 @@ export class Provider extends Component {
     ) {
 
       // If sound is turned on, play the error audio
-      if(this.state.sound) this.audio.error.play();
+      this.playSound('error');
       
       this.setState(prev => ({
         showWrongAnswerDialog: true,
@@ -99,8 +99,7 @@ export class Provider extends Component {
       }));
     } else { /* Else, if it's right*/
 
-      // If sound is turned on, play the success audio
-      if(this.state.sound) this.audio.success.play();
+     this.playSound('success');
 
       this.setState(prev => ({
         correctAnswersTotal: prev.correctAnswersTotal + 1,
@@ -110,6 +109,13 @@ export class Provider extends Component {
         }
       }));
       this.loadNewCharacter();
+    }
+  }
+
+  playSound = (sound) => {
+    if(this.state.sound) {
+      this.audio[sound].currentTime = 0; // Reset to audio beginning if it's already playing
+      this.audio[sound].play();
     }
   }
 
@@ -130,12 +136,10 @@ export class Provider extends Component {
     } else {
       this.toggleReport();
       
-      if(this.state.sound) {
-        if(this.state.wrongAnswersTotal > this.state.correctAnswersTotal) {
-          this.audio.gameOverBad.play();
-        } else {
-          this.audio.gameOver.play();
-        }
+      if(this.state.wrongAnswersTotal > this.state.correctAnswersTotal) {
+        this.playSound('gameOverBad');
+      } else {
+        this.playSound('gameOver');
       }
     }
   }
