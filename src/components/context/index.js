@@ -146,7 +146,8 @@ export class Provider extends Component {
       correctAnswers: {},
       correctAnswersTotal: 0,
       wrongAnswers: {},
-      wrongAnswersTotal: 0
+      wrongAnswersTotal: 0,
+      lastAnswerWas: ''
     })
 
   stopTimer = () => this.setState(({ timerTicking: false }))
