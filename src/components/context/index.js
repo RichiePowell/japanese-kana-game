@@ -50,6 +50,24 @@ export class Provider extends Component {
     }
   }
 
+  // Set audio files
+  audio = {
+    'success' : new Audio('success.ogg'),
+    'error' : new Audio('error.ogg'),
+    'gameOver' : new Audio('gameOver.ogg'),
+    'gameOverBad' : new Audio('gameOverBad.ogg')
+  }
+
+  // Set volumes
+  constructor(props) {
+    super(props);
+    this.audio.success.volume = 0.7;
+    this.audio.error.volume = 0.7;
+    this.audio.gameOver.volume = 0.7;
+    this.audio.gameOverBad.volume = 0.3;
+  }
+
+
   checkAnswer = (answer) => {
     const currentAnswer = this.state.currentAnswer;
     const userAnswer = answer.toLowerCase().trim();
@@ -68,7 +86,7 @@ export class Provider extends Component {
     ) {
 
       // If sound is turned on, play the error audio
-      if(this.state.sound) errorAudio.play();
+      if(this.state.sound) this.audio.error.play();
       
       this.setState(prev => ({
         showWrongAnswerDialog: true,
@@ -78,7 +96,7 @@ export class Provider extends Component {
     } else { /* Else, if it's right*/
 
       // If sound is turned on, play the success audio
-      if(this.state.sound) successAudio.play();
+      if(this.state.sound) this.audio.success.play();
 
       this.setState(prev => ({
         correctAnswers: prev.correctAnswers + 1,
