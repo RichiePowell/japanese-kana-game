@@ -447,3 +447,27 @@ html body.swal2-height-auto {
   left: 50%;
   transform: translateX(-50%);
 }
+
+.report-totals {
+  margin: 20px 0;
+
+  &--box {
+    display: inline-block;
+    border-right: 1px $inputBackground solid;
+    padding: 20px 30px;
+
+    &--label {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    &--total {
+      font-size: 28px;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}

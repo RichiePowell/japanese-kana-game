@@ -3,19 +3,19 @@ import { Consumer } from './context'
 
 const Score = () =>
   <Consumer>
-    { ({ lastAnswerWas, correctAnswers, wrongAnswers }) => (
+    { ({ lastAnswerWas, correctAnswersTotal, wrongAnswersTotal }) => (
       <div className="scores">
         <div
           className={ "correct" + (lastAnswerWas === 'correct' ? ' active' : '') }
         >
           <div className="title">Right</div>
-          <span>{ correctAnswers }</span>
+          <span>{ correctAnswersTotal }</span>
         </div>
         <div
           className={ "wrong" + (lastAnswerWas === 'wrong' ? ' active' : '') }
         >
           <div className="title">Wrong</div>
-          <span>{ wrongAnswers }</span>
+          <span>{ wrongAnswersTotal }</span>
         </div>
       </div>
     )}

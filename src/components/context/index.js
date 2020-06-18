@@ -13,14 +13,17 @@ const GameData = React.createContext();
 export class Provider extends Component {
   state = {
     characters: {},
-    answers: {},
     answerOptions: [],
     gameStart: false,
+    gameStartTime: '',
+    gameFinishTime: '',
     currentCharacter: '',
     currentAnswer: '',
     currentAnswerPrintable: '',
-    correctAnswers: 0,
-    wrongAnswers: 0,
+    correctAnswers: {},
+    correctAnswersTotal: 0,
+    wrongAnswers: {},
+    wrongAnswersTotal: 0,
     lastAnswerWas: '',
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
@@ -32,8 +35,10 @@ export class Provider extends Component {
     allowKanaChange: true,
     timer: 5,
     timerKey: '',
+    timerTicking: true,
     mode: 'unlimited',
-    showWrongAnswerDialog: false
+    showWrongAnswerDialog: false,
+    showReport: false
   };
 
   gameModes = {
@@ -58,23 +63,19 @@ export class Provider extends Component {
     'gameOverBad' : new Audio('gameOverBad.ogg')
   }
 
-  // Set volumes
   constructor(props) {
     super(props);
+
+    // Set volumes
     this.audio.success.volume = 0.7;
     this.audio.error.volume = 0.7;
     this.audio.gameOver.volume = 0.7;
     this.audio.gameOverBad.volume = 0.3;
   }
 
-
   checkAnswer = (answer) => {
     const currentAnswer = this.state.currentAnswer;
     const userAnswer = answer.toLowerCase().trim();
-    const successAudioFile = "success.ogg";
-    const errorAudioFile = "error.ogg";
-    const successAudio = new Audio(successAudioFile);
-    const errorAudio = new Audio(errorAudioFile);
 
     // If the answer is blank, do nothing
     if(userAnswer === '') return false;
@@ -90,8 +91,11 @@ export class Provider extends Component {
       
       this.setState(prev => ({
         showWrongAnswerDialog: true,
-        wrongAnswers: prev.wrongAnswers + 1,
-        lastAnswerWas: "wrong"
+        wrongAnswersTotal: prev.wrongAnswersTotal + 1,
+        lastAnswerWas: "wrong",
+        wrongAnswers: { ...prev.wrongAnswers,
+          [prev.currentCharacter] : parseInt(prev.wrongAnswers[prev.currentCharacter]) ? prev.wrongAnswers[prev.currentCharacter] + 1 : 1
+        }
       }));
     } else { /* Else, if it's right*/
 
@@ -99,23 +103,57 @@ export class Provider extends Component {
       if(this.state.sound) this.audio.success.play();
 
       this.setState(prev => ({
-        correctAnswers: prev.correctAnswers + 1,
-        lastAnswerWas: "correct"
+        correctAnswersTotal: prev.correctAnswersTotal + 1,
+        lastAnswerWas: "correct",
+        correctAnswers: { ...prev.correctAnswers,
+          [prev.currentCharacter] : parseInt(prev.correctAnswers[prev.currentCharacter]) ? prev.correctAnswers[prev.currentCharacter] + 1 : 1
+        }
       }));
       this.loadNewCharacter();
     }
   }
 
-  startGame = () => this.setState({ gameStart: true }, this.loadNewCharacter) // Set gameStart state to true and load a new character
+  startGame = () => {
+    let time = new Date();
+
+    this.setState({
+      gameStart: true,
+      gameStartTime: time.getTime(),
+      timerTicking: true
+    }, this.loadNewCharacter) // Set gameStart state to true and load a new character
+  }
+
   endGame = () => {
+    this.stopTimer();
+    let time = new Date();
+    this.setState({ gameFinishTime : time.getTime() });
+
+    if(this.state.correctAnswersTotal === 0 && this.state.wrongAnswersTotal === 0) {
+      this.clearStats();
+    } else {
+      this.toggleReport();
+      
+      if(this.state.wrongAnswersTotal > this.state.correctAnswersTotal) {
+        this.audio.gameOverBad.play();
+      } else {
+        this.audio.gameOver.play();
+      }
+    }
+  }
+
+  clearStats = () => 
     this.setState({
       gameStart: false,
-      correctAnswers: 0,
-      wrongAnswers: 0
+      correctAnswers: {},
+      correctAnswersTotal: 0,
+      wrongAnswers: {},
+      wrongAnswersTotal: 0
     })
-  }
+
+  stopTimer = () => this.setState(({ timerTicking: false }))
+  startTimer = () => this.setState(({ timerTicking: true }))
   toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
-  toggleInput = () => this.setState(prev => ({keyboardMode: !prev.keyboardMode}))
+  toggleInput = () => this.setState(prev => ({ keyboardMode: !prev.keyboardMode }))
   setKana = (kana) => this.setState({ kana: kana === 'all' ? Object.keys(this.state.kanaData) : [kana] }, this.loadKana) // Handles the changeKana select box
   
   // Add or remove the passed kana set name to the kana array in the state
@@ -137,8 +175,13 @@ export class Provider extends Component {
     })
   }
 
-  toggleWrongAnswerDialog = () => {
-    this.setState({ showWrongAnswerDialog: false });
+  toggleWrongAnswerDialog = () => this.setState({ showWrongAnswerDialog: false })
+
+  toggleReport = () => {
+    this.setState( prev => ({
+      showReport: !prev.showReport,
+      showWrongAnswerDialog: false
+    }));
   }
 
   // Loads the kana based on the current kana state
@@ -196,11 +239,13 @@ export class Provider extends Component {
         answers: this.state.answers,
         answerOptions: this.state.answerOptions,
         gameStart: this.state.gameStart,
+        gameStartTime: this.state.gameStartTime,
+        gameFinishTime: this.state.gameFinishTime,
         currentCharacter: this.state.currentCharacter,
         currentAnswer: this.state.currentAnswer,
         currentAnswerPrintable: this.state.currentAnswerPrintable,
-        correctAnswers: this.state.correctAnswers,
-        wrongAnswers: this.state.wrongAnswers,
+        correctAnswersTotal: this.state.correctAnswersTotal,
+        wrongAnswersTotal: this.state.wrongAnswersTotal,
         lastAnswerWas: this.state.lastAnswerWas,
         keyboardMode: this.state.keyboardMode,
         sound: this.state.sound,
@@ -208,8 +253,10 @@ export class Provider extends Component {
         allowKanaChange: this.state.allowKanaChange,
         timer: this.state.timer,
         timerKey: this.state.timerKey,
+        timerTicking: this.state.timerTicking,
         mode: this.state.mode,
         showWrongAnswerDialog: this.state.showWrongAnswerDialog,
+        showReport: this.state.showReport,
         actions: {
           loadKana: this.loadKana,
           loadNewCharacter: this.loadNewCharacter,
@@ -220,7 +267,9 @@ export class Provider extends Component {
           toggleInput: this.toggleInput,
           startGame: this.startGame,
           endGame: this.endGame,
+          clearStats: this.clearStats,
           toggleWrongAnswerDialog: this.toggleWrongAnswerDialog,
+          toggleReport: this.toggleReport,
           checkAnswer: this.checkAnswer
         }
       }}>
@@ -230,4 +279,4 @@ export class Provider extends Component {
   }
 }
 
-export const Consumer = GameData.Consumer;
+export const Consumer = GameData.Consumer

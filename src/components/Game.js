@@ -20,17 +20,19 @@ export const Game = () =>
       { context => (
         <>
           <Header />
-          <Score key={ ( context.correctAnswers + context.wrongAnswers ) } />
+          <Score key={( context.correctAnswers + context.wrongAnswers )} />
           <Character />
           { context.mode === 'timer' || context.mode === 'timerForEachAnswer' ?
             <div className="countdown">
               <CountdownCircleTimer
-                isPlaying
+                isPlaying={context.timerTicking}
                 key={context.timerKey}
                 size={250}
                 onComplete={() => {
                   if(context.mode === 'timerForEachAnswer') {
-                    context.actions.checkAnswer('Omae wa moe shindeiru');
+                    context.actions.checkAnswer('Omae wa mou shindeiru');
+                  } else {
+                    context.actions.endGame();
                   }
                 }}
                 duration={ context.timer }
@@ -47,11 +49,37 @@ export const Game = () =>
             title={context.currentCharacter + " is " +context.currentAnswerPrintable}
             type="error"
             onConfirm={() => {
-                context.actions.toggleWrongAnswerDialog();
-                context.actions.loadNewCharacter();
+                context.actions.toggleWrongAnswerDialog()
+                context.actions.loadNewCharacter()
               }
             }
           />
+          <SweetAlert
+            show={context.showReport}
+            title="Game Over!"
+            onConfirm={() => {
+                context.actions.toggleReport()
+                context.actions.clearStats()
+              }
+            }
+            html={`
+              <div class="report-totals">
+                <div class="report-totals--box time">
+                  <div class="report-totals--box--label">Time</div>
+                  <div class="report-totals--box--total">${ Math.floor((context.gameFinishTime - context.gameStartTime) / 1000) }s</div>
+                </div>
+                <div class="report-totals--box">
+                  <div class="report-totals--box--label">Correct</div>
+                  <div class="report-totals--box--total">${ context.correctAnswersTotal }</div>
+                </div>
+                <div class="report-totals--box">
+                  <div class="report-totals--box--label">Wrong</div>
+                  <div class="report-totals--box--total">${ context.wrongAnswersTotal }</div>
+                </div>
+              </div>
+            `}
+          >
+          </SweetAlert>
         </>
       )}
     </Consumer>
