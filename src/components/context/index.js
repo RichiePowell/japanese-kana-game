@@ -133,10 +133,12 @@ export class Provider extends Component {
     } else {
       this.toggleReport();
       
-      if(this.state.wrongAnswersTotal > this.state.correctAnswersTotal) {
-        this.audio.gameOverBad.play();
-      } else {
-        this.audio.gameOver.play();
+      if(this.state.sound) {
+        if(this.state.wrongAnswersTotal > this.state.correctAnswersTotal) {
+          this.audio.gameOverBad.play();
+        } else {
+          this.audio.gameOver.play();
+        }
       }
     }
   }
