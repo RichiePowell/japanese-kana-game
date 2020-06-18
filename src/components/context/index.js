@@ -114,19 +114,16 @@ export class Provider extends Component {
   }
 
   startGame = () => {
-    let time = new Date();
-
     this.setState({
       gameStart: true,
-      gameStartTime: time.getTime(),
+      gameStartTime: new Date().getTime(),
       timerTicking: true
     }, this.loadNewCharacter) // Set gameStart state to true and load a new character
   }
 
   endGame = () => {
     this.stopTimer();
-    let time = new Date();
-    this.setState({ gameFinishTime : time.getTime() });
+    this.setState({ gameFinishTime : new Date().getTime() });
 
     if(this.state.correctAnswersTotal === 0 && this.state.wrongAnswersTotal === 0) {
       this.clearStats();
