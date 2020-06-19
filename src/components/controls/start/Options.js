@@ -1,8 +1,8 @@
 import React from 'react'
 import { Consumer } from '../../context'
-import { ChangeAnswerTimer } from 'ChangeAnswerTimer'
-import { ChangeGameTimer } from 'ChangeGameTimer'
-import { ToggleShowCorrectAnswer } from 'ToggleShowCorrectAnswer'
+import { ChangeAnswerTimer } from 'C./hangeAnswerTimer'
+import { ChangeGameTimer } from './ChangeGameTimer'
+import { ToggleShowCorrectAnswer } from './ToggleShowCorrectAnswer'
 
 const Options = () =>
   <Consumer>
