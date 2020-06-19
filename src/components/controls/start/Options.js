@@ -1,8 +1,8 @@
 import React from 'react'
 import { Consumer } from '../../context'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ChangeAnswerTimer } from 'ChangeAnswerTimer'
 import { ChangeGameTimer } from 'ChangeGameTimer'
+import { ToggleShowCorrectAnswer } from 'ToggleShowCorrectAnswer'
 
 const Options = () =>
   <Consumer>
