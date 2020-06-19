@@ -1,6 +1,18 @@
 const GameOverModalContent = (data) => {
 
-  const wrongAnswers = ''
+  const wrongAnswers = Object.keys(data.wrongAnswers);
+  let wrongAnswersOutput = [];
+
+  wrongAnswers.forEach( (character) => {
+    let correctAnswers = Array.isArray(data.characters[character]) ? data.characters[character].join(' or ') : data.characters[character];
+    wrongAnswersOutput.push(`
+    <div class="report-wrong-answers--item">
+      <div class="report-wrong-answers--item--character">${character}</div>
+      <div class="report-wrong-answers--item--answer">${correctAnswers}</div>
+    </div>`)
+  })
+  
+  wrongAnswersOutput = wrongAnswersOutput.join('');
 
   return `<div class="report-totals">
       <div class="report-totals--box time">
@@ -17,8 +29,8 @@ const GameOverModalContent = (data) => {
       </div>
     </div>
     <div class="report-wrong-answers">
-      <h3>Answers you got wrong - please practice!</h3>
-      ${ wrongAnswers }
+      <h3>Answers you got wrong:</h3>
+      ${ wrongAnswersOutput }
     </div>`
 }
 

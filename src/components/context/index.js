@@ -81,10 +81,7 @@ export class Provider extends Component {
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
       || (!Array.isArray(currentAnswer) && userAnswer !== currentAnswer)
     ) {
-
-      // If sound is turned on, play the error audio
       this.playSound('error');
-      
       this.setState(prev => ({
         wrongAnswerDialogActive: this.state.showWrongAnswerDialog ? true : false,
         wrongAnswersTotal: prev.wrongAnswersTotal + 1,
@@ -93,10 +90,13 @@ export class Provider extends Component {
           [prev.currentCharacter] : parseInt(prev.wrongAnswers[prev.currentCharacter]) ? prev.wrongAnswers[prev.currentCharacter] + 1 : 1
         }
       }));
+      
+      if(!this.state.showWrongAnswerDialog) {
+        this.loadNewCharacter();
+      }
+
     } else { /* Else, if it's right*/
-
-     this.playSound('success');
-
+      this.playSound('success');
       this.setState(prev => ({
         correctAnswersTotal: prev.correctAnswersTotal + 1,
         lastAnswerWas: "correct",
@@ -104,9 +104,8 @@ export class Provider extends Component {
           [prev.currentCharacter] : parseInt(prev.correctAnswers[prev.currentCharacter]) ? prev.correctAnswers[prev.currentCharacter] + 1 : 1
         }
       }));
+      this.loadNewCharacter();
     }
-    
-    this.loadNewCharacter();
   }
 
   playSound = (sound) => {
@@ -255,6 +254,7 @@ export class Provider extends Component {
         currentAnswer: this.state.currentAnswer,
         currentAnswerPrintable: this.state.currentAnswerPrintable,
         correctAnswersTotal: this.state.correctAnswersTotal,
+        wrongAnswers: this.state.wrongAnswers,
         wrongAnswersTotal: this.state.wrongAnswersTotal,
         lastAnswerWas: this.state.lastAnswerWas,
         keyboardMode: this.state.keyboardMode,

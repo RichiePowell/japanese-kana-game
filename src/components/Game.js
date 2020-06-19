@@ -64,6 +64,7 @@ export const Game = () =>
             type="error"
             onConfirm={() => {
                 context.actions.hideWrongAnswerDialog()
+                context.actions.loadNewCharacter()
               }
             }
           />
