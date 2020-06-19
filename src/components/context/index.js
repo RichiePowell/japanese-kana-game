@@ -104,8 +104,9 @@ export class Provider extends Component {
           [prev.currentCharacter] : parseInt(prev.correctAnswers[prev.currentCharacter]) ? prev.correctAnswers[prev.currentCharacter] + 1 : 1
         }
       }));
-      this.loadNewCharacter();
     }
+    
+    this.loadNewCharacter();
   }
 
   playSound = (sound) => {

@@ -10,6 +10,7 @@ import Score from './Score'
 import Character from './Character'
 import Input from './Input'
 import Controls from './Controls'
+import GameOverModalContent from './modals/GameOver'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export const Game = () =>
@@ -18,7 +19,7 @@ export const Game = () =>
       { context => (
         <>
           <Header />
-          <Score key={( context.correctAnswers + context.wrongAnswers )} />
+          <Score key={( context.correctAnswersTotal + context.wrongAnswersTotal )} />
           <Character />
           { context.answerTimer > 0 ?
             <div className="countdown">
@@ -28,9 +29,6 @@ export const Game = () =>
                 size={250}
                 onComplete={() => {
                   context.actions.checkAnswer('Omae wa mou shindeiru');
-                  if( !context.showWrongAnswerDialog ) {
-                    context.actions.loadNewCharacter()
-                  }
                 }}
                 duration={ context.answerTimer }
                 colors={[['#e67272']]}
@@ -66,7 +64,6 @@ export const Game = () =>
             type="error"
             onConfirm={() => {
                 context.actions.hideWrongAnswerDialog()
-                context.actions.loadNewCharacter()
               }
             }
           />
@@ -78,24 +75,8 @@ export const Game = () =>
                 context.actions.clearStats()
               }
             }
-            html={`
-              <div class="report-totals">
-                <div class="report-totals--box time">
-                  <div class="report-totals--box--label">Time</div>
-                  <div class="report-totals--box--total">${ Math.floor((context.gameFinishTime - context.gameStartTime) / 1000) }s</div>
-                </div>
-                <div class="report-totals--box">
-                  <div class="report-totals--box--label">Correct</div>
-                  <div class="report-totals--box--total">${ context.correctAnswersTotal }</div>
-                </div>
-                <div class="report-totals--box">
-                  <div class="report-totals--box--label">Wrong</div>
-                  <div class="report-totals--box--total">${ context.wrongAnswersTotal }</div>
-                </div>
-              </div>
-            `}
-          >
-          </SweetAlert>
+            html={ GameOverModalContent(context) }
+          />
         </>
       )}
     </Consumer>
