@@ -10,7 +10,6 @@ import Score from './Score'
 import Character from './Character'
 import Input from './Input'
 import Controls from './Controls'
-// import Timer from './Timer'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export const Game = () =>
