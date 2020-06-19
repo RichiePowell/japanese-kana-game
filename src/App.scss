@@ -294,7 +294,9 @@ a {
   text-align: center;
 
   button {
-    padding: 13px 15px;
+    padding: 13px 0;
+    text-align: center;
+    width: 48px;
     background: $inputBackground;
     display: inline-block;
     margin-right: 10px;
