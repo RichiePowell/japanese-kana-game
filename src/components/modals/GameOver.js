@@ -12,7 +12,11 @@ const GameOverModalContent = (data) => {
     </div>`)
   })
   
-  wrongAnswersOutput = wrongAnswersOutput.join('');
+  wrongAnswersOutput = wrongAnswers.length > 0 ? `
+  <div class="report-wrong-answers">
+    <h3>Answers you got wrong:</h3>
+    ${ wrongAnswersOutput.join('') }
+  </div>` : '';
 
   return `<div class="report-totals">
       <div class="report-totals--box time">
@@ -28,10 +32,7 @@ const GameOverModalContent = (data) => {
         <div class="report-totals--box--total">${ data.wrongAnswersTotal }</div>
       </div>
     </div>
-    <div class="report-wrong-answers">
-      <h3>Answers you got wrong:</h3>
-      ${ wrongAnswersOutput }
-    </div>`
+    ${ wrongAnswersOutput }`
 }
 
 export default GameOverModalContent
