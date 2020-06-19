@@ -63,16 +63,6 @@ export class Provider extends Component {
     'gameOverBad' : new Audio('gameOverBad.ogg')
   }
 
-  constructor(props) {
-    super(props);
-
-    // Set volumes
-    this.audio.success.volume = 0.7;
-    this.audio.error.volume = 0.7;
-    this.audio.gameOver.volume = 0.7;
-    this.audio.gameOverBad.volume = 0.3;
-  }
-
   checkAnswer = (answer) => {
     const currentAnswer = this.state.currentAnswer;
     const userAnswer = answer.toLowerCase().trim();
@@ -114,6 +104,7 @@ export class Provider extends Component {
 
   playSound = (sound) => {
     if(this.state.sound) {
+      this.audio[sound].volume = 0.5; // Set volume to half because we want subtle sounds
       this.audio[sound].currentTime = 0; // Reset to audio beginning if it's already playing
       this.audio[sound].play();
     }
