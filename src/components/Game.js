@@ -10,7 +10,6 @@ import Score from './Score'
 import Character from './Character'
 import Input from './Input'
 import Controls from './Controls'
-import AudioPreload from './AudioPreload'
 // import Timer from './Timer'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
@@ -83,7 +82,6 @@ export const Game = () =>
         </>
       )}
     </Consumer>
-    <AudioPreload />
   </>
 
 export default Game
