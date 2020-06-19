@@ -14,7 +14,7 @@ const SelectMode = () =>
           checked={ mode === 'unlimited' ? true : false }
           onChange={ e => actions.handleModeChange(e.target.value) }
         />
-        <label className="box" for="mode-unlimited">
+        <label className="box" htmlFor="mode-unlimited">
           <FontAwesomeIcon icon="infinity" className="fa-fw" />
           Unlimited practice
           <FontAwesomeIcon icon="check" className="check" />
@@ -27,7 +27,7 @@ const SelectMode = () =>
           checked={ mode === 'timer' ? true : false }
           onChange={ e => actions.handleModeChange(e.target.value) }
         />
-        <label className="box" for="mode-timer">
+        <label className="box" htmlFor="mode-timer">
           <FontAwesomeIcon icon="clock" className="fa-fw" />
           30 second timer
           <FontAwesomeIcon icon="check" className="check" />
@@ -40,7 +40,7 @@ const SelectMode = () =>
           checked={ mode === 'timerForEachAnswer' ? true : false }
           onChange={ e => actions.handleModeChange(e.target.value) }
         />
-        <label className="box" for="mode-timerForEachAnswer">
+        <label className="box" htmlFor="mode-timerForEachAnswer">
           <FontAwesomeIcon icon="stopwatch" className="fa-fw" />
           Answer time limit
           <FontAwesomeIcon icon="check" className="check" />
