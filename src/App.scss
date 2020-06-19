@@ -68,6 +68,8 @@ a {
   }
 
   .option-boxes {
+    user-select: none;
+
     &.standout {
       padding: 15px 30px;
       background: lighten($inputBackground, 7);
@@ -82,6 +84,12 @@ a {
     }
 
     &.vertical {
+      svg:not(.fa-check) {
+        margin-right: 5px;
+        position: relative;
+        margin-bottom: -3px;
+      }
+
       .box {
         width: calc(100% - 40px);
         margin-bottom: 10px;
@@ -89,18 +97,18 @@ a {
         text-transform: none;
         text-align: left;
 
-        svg:not(.fa-check) {
-          margin-right: 10px;
-        }
-
         .fa-check {
           top: 7px;
         }
       }
     }
 
-    input {
+    input[type="checkbox"] {
       display: none;
+
+      &.show {
+        display: inline-block !important;
+      }
 
       &:checked + label {
         .check {
@@ -313,6 +321,7 @@ a {
   background: $mainColor;
   border-radius: 5px;
   border: none;
+  user-select: none;
   color: $white;
   cursor: pointer;
   transition: 0.2s all ease;
@@ -323,6 +332,23 @@ a {
   }
 }
 
+.input-row {
+  margin-top: 10px;
+
+  input[type="checkbox"] {
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+.input-label {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
 button.input-control {
   user-select: none;
   cursor: pointer;
@@ -330,7 +356,7 @@ button.input-control {
 
 .input-control {
   border: 1px $inputBackground solid;
-  background: none;
+  background: #fff;
   transition: 0.2s all ease;
   border-radius: 5px;
   line-height: 30px;
@@ -430,6 +456,10 @@ html body.swal2-height-auto {
   float: right;
 }
 
+.show {
+  display: block !important;
+}
+
 .text-center {
   text-align: center;
 }
@@ -446,6 +476,18 @@ html body.swal2-height-auto {
   margin-top: -265px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.game-timer {
+  position: absolute;
+  right: 30px;
+  user-select: none;
+  margin-top: -65px;
+
+  div {
+    color: #333 !important;
+    font-size: 18px;
+  }
 }
 
 .report-totals {

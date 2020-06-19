@@ -33,12 +33,18 @@ export class Provider extends Component {
       'Katakana' : Katakana
     },
     allowKanaChange: true,
-    timer: 5,
-    timerKey: '',
-    timerTicking: true,
     mode: 'unlimited',
-    showWrongAnswerDialog: false,
-    showReport: false
+    showWrongAnswerDialog: true,
+    wrongAnswerDialogActive: false,
+    showReport: false,
+    // Answer timer
+    answerTimer: 0,
+    answerTimerKey: '',
+    answerTimerTicking: true,
+    // Game timer
+    gameTimer: 0,
+    gameTimerKey: 'gameKey',
+    gameTimerTicking: true
   };
 
   gameModes = {
@@ -80,7 +86,7 @@ export class Provider extends Component {
       this.playSound('error');
       
       this.setState(prev => ({
-        showWrongAnswerDialog: true,
+        wrongAnswerDialogActive: this.state.showWrongAnswerDialog ? true : false,
         wrongAnswersTotal: prev.wrongAnswersTotal + 1,
         lastAnswerWas: "wrong",
         wrongAnswers: { ...prev.wrongAnswers,
@@ -114,12 +120,14 @@ export class Provider extends Component {
     this.setState({
       gameStart: true,
       gameStartTime: new Date().getTime(),
-      timerTicking: true
+      answerTimerTicking: true,
+      gameTimerTicking: true
     }, this.loadNewCharacter) // Set gameStart state to true and load a new character
   }
 
   endGame = () => {
-    this.stopTimer();
+    this.stopAnswerTimer();
+    this.stopGameTimer();
     this.setState({ gameFinishTime : new Date().getTime() });
 
     if(this.state.correctAnswersTotal === 0 && this.state.wrongAnswersTotal === 0) {
@@ -145,8 +153,10 @@ export class Provider extends Component {
       lastAnswerWas: ''
     })
 
-  stopTimer = () => this.setState(({ timerTicking: false }))
-  startTimer = () => this.setState(({ timerTicking: true }))
+  stopAnswerTimer = () => this.setState(({ answerTimerTicking: false }))
+  startAnswerTimer = () => this.setState(({ answerTimerTicking: true }))
+  stopGameTimer = () => this.setState(({ gameTimerTicking: false }))
+  startGameTimer = () => this.setState(({ gameTimerTicking: true }))
   toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
   toggleInput = () => this.setState(prev => ({ keyboardMode: !prev.keyboardMode }))
   setKana = (kana) => this.setState({ kana: kana === 'all' ? Object.keys(this.state.kanaData) : [kana] }, this.loadKana) // Handles the changeKana select box
@@ -163,6 +173,9 @@ export class Provider extends Component {
     this.setState({ kana: newKana }, this.loadKana)
   }
 
+  changeAnswerTimer = (seconds) => this.setState({ answerTimer: parseInt(seconds) })
+  changeGameTimer = (seconds) => this.setState({ gameTimer: parseInt(seconds) })
+
   handleModeChange = (mode) => {
     this.setState({
       mode: mode,
@@ -170,12 +183,13 @@ export class Provider extends Component {
     })
   }
 
-  toggleWrongAnswerDialog = () => this.setState({ showWrongAnswerDialog: false })
+  toggleWrongAnswerDialog = () => this.setState( prev => ({ showWrongAnswerDialog: !prev.showWrongAnswerDialog }))
+  hideWrongAnswerDialog = () => this.setState({ wrongAnswerDialogActive: false })
 
   toggleReport = () => {
     this.setState( prev => ({
       showReport: !prev.showReport,
-      showWrongAnswerDialog: false
+      wrongAnswerDialogActive: false
     }));
   }
 
@@ -217,7 +231,7 @@ export class Provider extends Component {
       currentAnswer: answer,
       currentAnswerPrintable: answerPrintable,
       answerOptions: shuffle(answerOptions),
-      timerKey: this.state.mode === 'timerForEachAnswer' ? character : this.state.timerKey // Reset the timer depending on the game mode
+      answerTimerKey: character
     });
 
     return character;
@@ -246,11 +260,15 @@ export class Provider extends Component {
         sound: this.state.sound,
         kana: this.state.kana,
         allowKanaChange: this.state.allowKanaChange,
-        timer: this.state.timer,
-        timerKey: this.state.timerKey,
-        timerTicking: this.state.timerTicking,
+        answerTimer: this.state.answerTimer,
+        answerTimerKey: this.state.answerTimerKey,
+        answerTimerTicking: this.state.answerTimerTicking,
+        gameTimer: this.state.gameTimer,
+        gameTimerKey: this.state.gameTimerKey,
+        gameTimerTicking: this.state.gameTimerTicking,
         mode: this.state.mode,
         showWrongAnswerDialog: this.state.showWrongAnswerDialog,
+        wrongAnswerDialogActive: this.state.wrongAnswerDialogActive,
         showReport: this.state.showReport,
         actions: {
           loadKana: this.loadKana,
@@ -263,9 +281,12 @@ export class Provider extends Component {
           startGame: this.startGame,
           endGame: this.endGame,
           clearStats: this.clearStats,
+          hideWrongAnswerDialog: this.hideWrongAnswerDialog,
           toggleWrongAnswerDialog: this.toggleWrongAnswerDialog,
           toggleReport: this.toggleReport,
-          checkAnswer: this.checkAnswer
+          checkAnswer: this.checkAnswer,
+          changeAnswerTimer: this.changeAnswerTimer,
+          changeGameTimer: this.changeGameTimer
         }
       }}>
         { this.props.children }

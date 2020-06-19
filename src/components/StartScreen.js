@@ -2,7 +2,8 @@ import React from 'react'
 import { Consumer } from './context'
 import Header from './Header'
 import ChangeKana from './controls/start/ChangeKana'
-import SelectMode from './controls/start/SelectMode'
+import Options from './controls/start/Options'
+import StartButton from './controls/start/StartButton'
 
 export const StartScreen = () =>
   <Consumer>
@@ -11,10 +12,8 @@ export const StartScreen = () =>
         <div className="start-screen">
           <Header />
           <ChangeKana />
-          <SelectMode />
-          <div className="text-center">
-            <button className="button" onClick={ actions.startGame }>Start Game</button>
-          </div>
+          <Options />
+          <StartButton />
         </div>
       )
     }}

@@ -20,34 +20,52 @@ export const Game = () =>
           <Header />
           <Score key={( context.correctAnswers + context.wrongAnswers )} />
           <Character />
-          { context.mode === 'timer' || context.mode === 'timerForEachAnswer' ?
+          { context.answerTimer > 0 ?
             <div className="countdown">
               <CountdownCircleTimer
-                isPlaying={context.timerTicking}
-                key={context.timerKey}
+                isPlaying={context.answerTimerTicking}
+                key={context.answerTimerKey}
                 size={250}
                 onComplete={() => {
-                  if(context.mode === 'timerForEachAnswer') {
-                    context.actions.checkAnswer('Omae wa mou shindeiru');
-                  } else {
-                    context.actions.endGame();
+                  context.actions.checkAnswer('Omae wa mou shindeiru');
+                  if( !context.showWrongAnswerDialog ) {
+                    context.actions.loadNewCharacter()
                   }
                 }}
-                duration={ context.timer }
+                duration={ context.answerTimer }
                 colors={[['#e67272']]}
                 trailColor="#c83232"
               />
             </div>
             : ''
           }
+          { context.gameTimer > 0 ?
+            <div className="game-timer">
+              <CountdownCircleTimer
+                isPlaying={context.gameTimerTicking}
+                key={ context.gameTimerKey }
+                size={50}
+                onComplete={() => {
+                  context.actions.endGame()
+                }}
+                duration={ context.gameTimer }
+                colors={[['#ccc']]}
+                trailColor="#666"
+                strokeWidth={5}
+              >
+                { ({remainingTime}) => remainingTime }
+              </CountdownCircleTimer>
+            </div>
+            : ''
+          }
           <Input />
           <Controls />
           <SweetAlert
-            show={context.showWrongAnswerDialog}
+            show={context.wrongAnswerDialogActive}
             title={context.currentCharacter + " is " +context.currentAnswerPrintable}
             type="error"
             onConfirm={() => {
-                context.actions.toggleWrongAnswerDialog()
+                context.actions.hideWrongAnswerDialog()
                 context.actions.loadNewCharacter()
               }
             }
