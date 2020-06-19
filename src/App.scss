@@ -520,7 +520,7 @@ html body.swal2-height-auto {
   &--item {
     display: inline-block;
     padding: 8px 20px;
-    background: $inputBackground;
+    border: 1px $inputBackground solid;
     border-radius: 5px;
     margin: 5px;
 
