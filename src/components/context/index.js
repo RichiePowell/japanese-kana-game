@@ -49,8 +49,6 @@ export class Provider extends Component {
         group: 2
       },
     },
-    allowKanaChange: true,
-    mode: 'unlimited',
     showWrongAnswerDialog: true,
     wrongAnswerDialogActive: false,
     showReport: false,
@@ -63,20 +61,6 @@ export class Provider extends Component {
     gameTimerKey: 'gameKey',
     gameTimerTicking: true
   };
-
-  gameModes = {
-    'unlimited' : {
-      allowKanaChange: true
-    },
-    'timer' : {
-      timer: 30,
-      allowKanaChange: false
-    },
-    'timerForEachAnswer' : {
-      timer: 5,
-      allowKanaChange: false
-    }
-  }
 
   // Set audio files
   audio = {
@@ -176,7 +160,6 @@ export class Provider extends Component {
   startGameTimer = () => this.setState(({ gameTimerTicking: true }))
   toggleSound = () => this.setState(prev => ({ sound: !prev.sound }))
   toggleInput = () => this.setState(prev => ({ keyboardMode: !prev.keyboardMode }))
-  setKana = (kana) => this.setState({ kana: kana === 'all' ? Object.keys(this.state.kanaData) : [kana] }, this.loadKana) // Handles the changeKana select box
   
   toggleDarkMode = () => {
     document.querySelector('body').classList.toggle('dark');
@@ -197,14 +180,6 @@ export class Provider extends Component {
 
   changeAnswerTimer = (seconds) => this.setState({ answerTimer: parseInt(seconds) })
   changeGameTimer = (seconds) => this.setState({ gameTimer: parseInt(seconds) })
-
-  handleModeChange = (mode) => {
-    this.setState({
-      mode: mode,
-      ...this.gameModes[mode]
-    })
-  }
-
   toggleWrongAnswerDialog = () => this.setState( prev => ({ showWrongAnswerDialog: !prev.showWrongAnswerDialog }))
   hideWrongAnswerDialog = () => this.setState({ wrongAnswerDialogActive: false })
 
@@ -288,23 +263,19 @@ export class Provider extends Component {
         keyboardMode: this.state.keyboardMode,
         sound: this.state.sound,
         kana: this.state.kana,
-        allowKanaChange: this.state.allowKanaChange,
         answerTimer: this.state.answerTimer,
         answerTimerKey: this.state.answerTimerKey,
         answerTimerTicking: this.state.answerTimerTicking,
         gameTimer: this.state.gameTimer,
         gameTimerKey: this.state.gameTimerKey,
         gameTimerTicking: this.state.gameTimerTicking,
-        mode: this.state.mode,
         showWrongAnswerDialog: this.state.showWrongAnswerDialog,
         wrongAnswerDialogActive: this.state.wrongAnswerDialogActive,
         showReport: this.state.showReport,
         actions: {
           loadKana: this.loadKana,
           loadNewCharacter: this.loadNewCharacter,
-          setKana: this.setKana,
           toggleKana: this.toggleKana,
-          handleModeChange: this.handleModeChange,
           toggleSound: this.toggleSound,
           toggleInput: this.toggleInput,
           toggleDarkMode: this.toggleDarkMode,
