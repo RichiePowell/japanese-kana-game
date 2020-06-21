@@ -1,9 +1,5 @@
-$fontFamily: 'Source Sans Pro', Sans-serif;
-$mainColor: rgba(200, 50, 50, 1);
-$mainColorHover: darken($mainColor, 20);
-$white: #fff;
-$inputBackground: #e5e5e5;
-$inputBackgroundHover: darken(#e5e5e5, 10);
+@import 'Variables';
+@import 'DarkMode';
 
 html,
 body {
@@ -14,19 +10,9 @@ body {
 body {
   margin: 0;
   font-family: $fontFamily;
-  background: #e5e5e5 url(bg.svg) no-repeat center center;
+  background: #e5e5e5 url(../images/bg.svg) no-repeat center center;
   background-size: cover;
   color: #333;
-
-  // &:before {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   background: rgba(0,0,0,.2);
-  //   content:'';
-  // }
 }
 
 #root {
@@ -88,6 +74,11 @@ a {
         margin-right: 5px;
         position: relative;
         margin-bottom: -3px;
+        transition: 0.2s all ease;
+
+        &.active {
+          color: $mainColor;
+        }
       }
 
       .box {
@@ -123,7 +114,6 @@ a {
       outline: none;
       border-radius: 5px;
       border: 1px $inputBackground solid;
-      background: $white;
       padding: 10px 20px;
       text-align: center;
       transition: 0.2s all ease;
@@ -301,10 +291,11 @@ a {
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 20px;
-    border: none;
+    border: 1px $inputBackground solid;
     border-radius: 5px;
     font-size: 16px;
     transition: 0.2s all ease;
+    cursor: pointer;
 
     &:hover {
       background: $inputBackgroundHover;
@@ -331,6 +322,10 @@ a {
 
   &:hover {
     background: $mainColorHover;
+  }
+
+  &.start {
+    margin: 0 20px;
   }
 }
 

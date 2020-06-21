@@ -1,21 +1,17 @@
 import React from 'react'
 import { Consumer } from './context'
-// import ChangeKana from './controls/ChangeKana'
 import Audio from './controls/Audio'
+import DarkMode from './controls/DarkMode'
 import InputToggle from './controls/InputToggle'
 import EndGame from './controls/EndGame'
 
 const Controls = () =>
   <Consumer>
-    { ({ actions, kana, allowKanaChange, sound }) => (
+    { ({ actions, sound }) => (
       <div className="controls">
         <Audio sound={sound} actions={actions} />
+        <DarkMode />
         <InputToggle actions={actions} />
-        {/* <ChangeKana
-          actions={actions}
-          allowKanaChange={allowKanaChange}
-          kana={kana}
-        /> */}
         <div className="float-right">
           <EndGame actions={actions} />
         </div>

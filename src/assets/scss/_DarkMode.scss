@@ -1,0 +1,150 @@
+body {
+  &:before {
+    transition: 0.2s all ease;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content:'';
+  }
+
+  &.dark {
+    color: $darkModeTextColor;
+
+    &:before {
+      background: rgba(0,0,0,.7);
+    }
+
+    .container {
+      background: $darkModeBackground;
+    }
+
+    .character {
+      background: $darkModeMainColor;
+      color: $darkModeTextColor;
+    }
+
+    .scores {
+      .correct {
+        span {
+          color: $darkModeScoresCorrectTextColor;
+        }
+      }
+
+      .wrong {
+        span {
+          color: $darkModeScoresWrongTextColor;
+        }
+      }
+    }
+
+    .input {
+      .answer {
+        background: $darkModeAnswerBackground;
+        color: $darkModeAnswerTextColor;
+      }
+
+      .submit {
+        background: $darkModeAnswerButtonBackground;
+        color: $darkModeAnswerButtonTextColor;
+
+        &:hover {
+          background: lighten($darkModeAnswerButtonBackground, 12);
+          // border-color: $darkModeAnswerButtonBorderColorHover;
+        }
+      }
+    }
+
+    .answer-options {
+      button {
+        background: $darkModeAnswerOptionsBackground;
+        color: $darkModeAnswerOptionsTextColor;
+        border-color: $darkModeAnswerOptionsBorderColor;
+
+        &:hover {
+          background: $darkModeAnswerOptionsBackgroundHover;
+          color: $darkModeAnswerOptionsTextColorHover;
+          border-color: $darkModeAnswerOptionsBorderColorHover;
+        }
+      }
+    }
+
+    .option-boxes {
+      .box {
+        border-color: $darkModeInputBorderColor;
+        background: #222;
+
+        &:hover {
+          border-color: $darkModeInputBorderColorHover;
+        }
+
+        .check {
+          background: $darkModeCheckActiveBackground;
+          color: $darkModeCheckActiveTextColor;
+        }
+      }
+
+      &.vertical {
+        background: #222;
+        border-color: $darkModeInputBackground;
+
+        svg:not(.fa-check).active {
+          color: $darkModeCheckActiveBackground;
+        }
+      }
+    }
+
+    .input-control {
+      background: $darkModeInputBackground;
+      color: $darkModeInputTextColor;
+      border-color: $darkModeInputBorderColor;
+
+      &:hover {
+        color: $darkModeInputTextColorHover;
+        background: $darkModeInputBackgroundHover;
+        border-color: $darkModeInputBorderColorHover;
+      }
+    }
+
+    .start-screen {
+      .button {
+        color: $darkModeInputAltTextColor;
+        background: $darkModeInputAltBackground;
+        border-color: $darkModeInputAltBorderColor;
+
+        &:hover {
+          color: $darkModeInputAltTextColorHover;
+          background: $darkModeInputAltBackgroundHover;
+          border-color: $darkModeInputAltBorderColorHover;
+        }
+      }
+    }
+
+    /* Modal */
+    .swal2-popup {
+      background: $darkModeBackground;
+
+      .swal2-title {
+        color: $darkModeTextColor;
+      }
+
+      .swal2-content {
+        color: $darkModeTextColor;
+
+        .report-totals--box {
+          border-color: $darkModeInputBorderColor;
+        }
+
+        .report-wrong-answers--item {
+          border-color: $darkModeInputBorderColor;
+        }
+      }
+
+      .swal2-styled.swal2-confirm {
+        color: $darkModeInputAltTextColor;
+        background: $darkModeInputAltBackground !important;
+        border: none !important;
+        outline: none;
+      }
+    }
+  }
+}

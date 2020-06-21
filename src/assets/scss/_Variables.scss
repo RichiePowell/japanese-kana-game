@@ -1,0 +1,52 @@
+$fontFamily: 'Source Sans Pro', Sans-serif;
+$mainColor: rgba(200, 50, 50, 1);
+$mainColorHover: darken($mainColor, 20);
+$white: #fff;
+$green: #32CD32;
+
+$inputBackground: #e5e5e5;
+$inputBackgroundHover: darken(#e5e5e5, 10);
+
+
+/* Dark Mode */
+$darkModeMainColor: #883434;
+$darkModeBackground: #333;
+$darkModeTextColor: #ddd;
+
+$darkModeInputTextColor: $darkModeTextColor;
+$darkModeInputBackground: #444;
+$darkModeInputBorderColor: #444;
+
+$darkModeInputTextColorHover: $darkModeTextColor;
+$darkModeInputBackgroundHover: #444;
+$darkModeInputBorderColorHover: #666;
+
+$darkModeInputAltTextColor: $darkModeTextColor;
+$darkModeInputAltBackground: $darkModeMainColor;
+$darkModeInputAltBorderColor: $darkModeMainColor;
+
+$darkModeInputAltTextColorHover: $darkModeTextColor;
+$darkModeInputAltBackgroundHover: darken($darkModeInputAltBackground, 3);
+$darkModeInputAltBorderColorHover: $darkModeInputAltBackgroundHover;
+
+$darkModeAnswerTextColor: $darkModeTextColor;
+$darkModeAnswerBackground: #222;
+$darkModeAnswerBorderColor: $darkModeInputBackground;
+
+$darkModeAnswerButtonTextColor: $darkModeTextColor;
+$darkModeAnswerButtonBackground: #444;
+$darkModeAnswerButtonBorderColor: #555;
+
+$darkModeAnswerOptionsTextColor: $darkModeTextColor;
+$darkModeAnswerOptionsBackground: #222;
+$darkModeAnswerOptionsBorderColor: #444;
+
+$darkModeAnswerOptionsTextColorHover: $darkModeTextColor;
+$darkModeAnswerOptionsBackgroundHover: #444;
+$darkModeAnswerOptionsBorderColorHover: #555;
+
+$darkModeCheckActiveBackground: $darkModeMainColor;
+$darkModeCheckActiveTextColor: #ddd;
+
+$darkModeScoresCorrectTextColor: $green;
+$darkModeScoresWrongTextColor: #f55;

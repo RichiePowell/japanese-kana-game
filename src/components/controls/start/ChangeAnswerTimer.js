@@ -4,10 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ChangeAnswerTimer = ({ answerTimer, actions }) =>
   <div className="float-right">
     <div className="input-label">Time to answer</div>
-    <FontAwesomeIcon icon="stopwatch" className="fa-fw" />
+    <FontAwesomeIcon icon="stopwatch" className="fa-fw answer-time-icon" />
     <select
       className="input-control"
-      onChange={ (e) => { actions.changeAnswerTimer(e.target.value)}}
+      onChange={ (e) => {
+        actions.changeAnswerTimer(e.target.value);
+        if(e.target.value !== "0") {
+          document.querySelector('.answer-time-icon').classList.add('active');
+        } else {
+          document.querySelector('.answer-time-icon').classList.remove('active');
+        }
+      }}
       value={ answerTimer }
     >
       <option value="0">No limit</option>
