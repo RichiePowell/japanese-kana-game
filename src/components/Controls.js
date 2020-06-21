@@ -10,7 +10,7 @@ const Controls = () =>
     { ({ actions, sound }) => (
       <div className="controls">
         <Audio sound={sound} actions={actions} />
-        <DarkMode />
+        <DarkMode actions={actions} />
         <InputToggle actions={actions} />
         <div className="float-right">
           <EndGame actions={actions} />

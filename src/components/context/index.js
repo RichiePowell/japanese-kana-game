@@ -14,6 +14,7 @@ const GameData = React.createContext();
 
 export class Provider extends Component {
   state = {
+    darkMode: false,
     characters: {},
     answerOptions: [],
     gameStart: false,
@@ -177,6 +178,11 @@ export class Provider extends Component {
   toggleInput = () => this.setState(prev => ({ keyboardMode: !prev.keyboardMode }))
   setKana = (kana) => this.setState({ kana: kana === 'all' ? Object.keys(this.state.kanaData) : [kana] }, this.loadKana) // Handles the changeKana select box
   
+  toggleDarkMode = () => {
+    document.querySelector('body').classList.toggle('dark');
+    this.setState( prev => ({ darkMode: !prev.darkMode }));
+  }
+
   // Add or remove the passed kana set name to the kana array in the state
   toggleKana = (kana) => {
     let newKana = this.state.kana;
@@ -265,6 +271,7 @@ export class Provider extends Component {
   render() {
     return (
       <GameData.Provider value={{
+        darkMode: this.state.darkMode,
         characters: this.state.characters,
         answers: this.state.answers,
         answerOptions: this.state.answerOptions,
@@ -300,6 +307,7 @@ export class Provider extends Component {
           handleModeChange: this.handleModeChange,
           toggleSound: this.toggleSound,
           toggleInput: this.toggleInput,
+          toggleDarkMode: this.toggleDarkMode,
           startGame: this.startGame,
           endGame: this.endGame,
           clearStats: this.clearStats,

@@ -103,6 +103,14 @@ body {
         background: #222;
         border-color: $darkModeInputBorderColor;
 
+        &:hover {
+          border-color: $darkModeInputBorderColorHover;
+
+          .options__sub__checkbox {
+            border-color: $darkModeInputBorderColorHover;
+          }
+        }
+
         &__checkbox {
           border-color: $darkModeInputBorderColor;
 
@@ -139,6 +147,23 @@ body {
       }
     }
 
+    .input-row {
+      background: #222;
+      border-color: $darkModeInputBorderColor;
+
+      &:hover .input-row__checkbox {
+        border-color: $darkModeInputBorderColorHover;
+      }
+
+      &__checkbox {
+        border-color: $darkModeInputBorderColor;
+
+        &__check {
+          color: $darkModeMainColor;
+        }
+      }
+    }
+
     /* Modal */
     .swal2-popup {
       background: $darkModeBackground;
@@ -166,9 +191,9 @@ body {
         outline: none;
       }
     }
-  }
-}
 
-.game-timer > div > div {
-  color: $darkModeTextColor !important;
+    .game-timer > div > div {
+      color: $darkModeTextColor !important;
+    }
+  }
 }

@@ -1,19 +1,14 @@
 import React from 'react'
-import { Consumer } from './context'
 import InputKeyboard from './InputKeyboard'
 import InputChoices from './InputChoices'
 
-const Input = () =>
-  <Consumer>
-    { ({ keyboardMode }) => (
-      <div className="answers">
-        { keyboardMode ?
-          <InputKeyboard />
-        :
-          <InputChoices />
-        }
-      </div>
-    )}
-  </Consumer>
+const Input = ({ keyboardMode }) =>
+  <div className="answers">
+    { keyboardMode ?
+      <InputKeyboard />
+    :
+      <InputChoices />
+    }
+  </div>
 
 export default Input

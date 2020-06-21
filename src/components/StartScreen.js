@@ -25,7 +25,7 @@ const StartScreen = () =>
             sound={sound}
             actions={actions} />
           <StartButton actions={actions} />
-          <DarkMode />
+          <DarkMode actions={actions} />
         </div>
       </div>
     )}

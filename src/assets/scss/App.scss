@@ -66,6 +66,7 @@ a {
 
   .options {
     user-select: none;
+    transition: 0.2s all ease;
 
     &--highlight {
       padding: 15px 30px;
@@ -180,13 +181,13 @@ a {
       font-size: 11px;
       text-transform: uppercase;
       display: block;
-      bottom: -10px;
+      bottom: -11px;
       left: 50%;
       transform: translateX(-50%);
       border-radius: 5px;
       border: 1px $inputBackground solid;
       background: $white;
-      padding: 3px 7px;
+      padding: 3px;
       white-space: nowrap;
       cursor: pointer;
 
@@ -227,11 +228,19 @@ a {
   display: block;
   margin-bottom: 0 !important;
   margin-top: 15px;
+  cursor: pointer;
+
+  &:hover {
+    .input-row__checkbox {
+      border-color: $inputBackgroundHover;
+    }
+  }
 
   &__checkbox {
     border-radius: 99px;
     border: 1px $inputBackground solid;
     height: 17px;
+    transition: 0.2s all ease;
     width: 17px;
     line-height: 17px;
     display: inline-block;
@@ -239,7 +248,7 @@ a {
     text-align: center;
 
     &__check {
-      color: $white;
+      color: $mainColor;
       transform: scale(0);
       opacity: 0;
       transition: 0.2s all ease;
@@ -248,7 +257,6 @@ a {
     &__input:checked + .input-row {
       .input-row__checkbox {
         &__check {
-          color: $mainColor;
           opacity: 1;
           transform: scale(1);
         }

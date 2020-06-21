@@ -1,10 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const DarkMode = () =>
+const DarkMode = ({ actions }) =>
   <button
     className="input-control icon dark-mode"
-    onClick={ () => document.querySelector('body').classList.toggle('dark') }
+    onClick={ () => actions.toggleDarkMode() }
   >
     <FontAwesomeIcon icon="adjust" />
   </button>

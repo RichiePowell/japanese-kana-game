@@ -31,8 +31,8 @@ export const Game = () =>
                   context.actions.checkAnswer('Omae wa mou shindeiru');
                 }}
                 duration={ context.answerTimer }
-                colors={[['#e67272']]}
-                trailColor="#c83232"
+                colors={[ context.darkMode ? ['#ad4e4e'] : ['#e67272'] ]}
+                trailColor="transparent"
               />
             </div>
             : ''
@@ -40,7 +40,7 @@ export const Game = () =>
           { context.gameTimer > 0 ?
             <div className="game-timer">
               <CountdownCircleTimer
-                isPlaying={context.gameTimerTicking}
+                isPlaying={ context.gameTimerTicking }
                 key={ context.gameTimerKey }
                 size={50}
                 onComplete={() => {
@@ -56,10 +56,10 @@ export const Game = () =>
             </div>
             : ''
           }
-          <Input />
+          <Input keyboardMode={ context.keyboardMode } />
           <Controls />
           <SweetAlert
-            show={context.wrongAnswerDialogActive}
+            show={ context.wrongAnswerDialogActive }
             title={context.currentCharacter + " is " +context.currentAnswerPrintable}
             type="error"
             onConfirm={() => {
@@ -69,7 +69,7 @@ export const Game = () =>
             }
           />
           <SweetAlert
-            show={context.showReport}
+            show={ context.showReport }
             title="Game Over!"
             onConfirm={() => {
                 context.actions.toggleReport()
