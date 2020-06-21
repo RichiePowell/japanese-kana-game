@@ -1,0 +1,126 @@
+.scores {
+  width: 100%;
+  user-select: none;
+
+  &__total {
+    position: absolute;
+    font-size: 18px;
+    text-align: center;
+    transition: .2s all ease;
+
+    &__correct span {
+      color: green;
+    }
+  
+    &__wrong {
+      right: 30px;
+  
+      span {
+        color: $mainColor;
+      }
+    }
+
+    span {
+      display: block;
+      font-weight: bold;
+      opacity: 0.5;
+    }
+
+    &__title {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    &--active span {
+      animation: pulse 0.3s ease;
+    }
+
+    svg {
+      color: #999999;
+      display: block;
+      font-size: 16px;
+    }
+  }
+}
+
+.character {
+  font-size: 100px;
+  background: $mainColor;
+  color: $white;
+  border-radius: 9999px;
+  height: 250px;
+  line-height: 250px;
+  width: 250px;
+  margin: auto;
+  vertical-align: middle;
+  margin-bottom: 15px;
+  user-select: none;
+  text-align: center;
+}
+
+.input {
+  position: relative;
+
+  .answer {
+    background: $inputBackground;
+    font-size: 24px;
+    border: none;
+    width: 100%;
+    display: block;
+    padding: 10px 20px;
+    font-weight: 300;
+    box-sizing: border-box;
+    border-radius: 999px;
+    margin-bottom: 15px;
+  }
+  
+  .submit {
+    background: darken($inputBackground, 30);
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    color: $white;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.1s all ease;
+
+    &:hover {
+      background: darken($inputBackground, 50);
+    }
+  }
+}
+
+.answer-options {
+  text-align: center;
+
+  button {
+    padding: 13px 0;
+    text-align: center;
+    width: 48px;
+    background: $inputBackground;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border: 1px $inputBackground solid;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.2s all ease;
+    cursor: pointer;
+
+    &:hover {
+      background: $inputBackgroundHover;
+    }
+
+    &:active {
+      background: $mainColor;
+      color: $white;
+      transform: scale(0.9);
+    }
+  }
+}

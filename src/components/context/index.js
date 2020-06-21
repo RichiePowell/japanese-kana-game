@@ -6,7 +6,9 @@ import { isMobile, isTablet } from 'react-device-detect'
 
 /* Character data */
 import Hiragana from './../../data/Hiragana'
+import HiraganaCombos from './../../data/HiraganaCombos'
 import Katakana from './../../data/Katakana'
+import KatakanaCombos from './../../data/KatakanaCombos'
 
 const GameData = React.createContext();
 
@@ -29,8 +31,22 @@ export class Provider extends Component {
     sound: true,
     kana: ['Hiragana', 'Katakana'],
     kanaData: {
-      'Hiragana' : Hiragana,
-      'Katakana' : Katakana
+      'Hiragana' : {
+        characters: Hiragana,
+        group: 1
+      },
+      'HiraganaCombos' : {
+        characters: HiraganaCombos,
+        group: 2
+      },
+      'Katakana' : {
+        characters: Katakana,
+        group: 1
+      },
+      'KatakanaCombos' : {
+        characters: KatakanaCombos,
+        group: 2
+      },
     },
     allowKanaChange: true,
     mode: 'unlimited',
@@ -198,14 +214,19 @@ export class Provider extends Component {
     // Create an empty object for new character set
     let newCharacterSet = {};
     // Go through each selected kana and insert it into the new character set object
-    this.state.kana.forEach((kana) => newCharacterSet = {...newCharacterSet, ...this.state.kanaData[kana]})
+    this.state.kana.forEach((kana) => newCharacterSet = {...newCharacterSet, ...this.state.kanaData[kana].characters})
     // Insert the new character set into the state
     this.setState({ characters: newCharacterSet });
   }
 
   // Loads a new character
   loadNewCharacter = () => {
-    const characters = this.state.characters;
+    /* Pick a random character set from the selected sets */
+    const shuffledCharacterSets = shuffle(this.state.kana);
+    const characterSet = shuffledCharacterSets.shift();
+
+    /* Assign the characters from the chosen set */
+    const characters = this.state.kanaData[characterSet].characters;
     const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
     
     // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of characters that's being loaded so it doesn't appear twice in a row

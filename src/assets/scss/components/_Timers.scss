@@ -1,0 +1,18 @@
+.countdown {
+  position: absolute;
+  margin-top: -265px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.game-timer {
+  position: absolute;
+  right: 30px;
+  user-select: none;
+  margin-top: -65px;
+
+  div {
+    color: #333 !important;
+    font-size: 18px;
+  }
+}

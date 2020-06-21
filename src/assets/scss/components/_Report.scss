@@ -1,0 +1,38 @@
+.report-totals {
+  margin: 20px 0;
+
+  &__box {
+    display: inline-block;
+    border-right: 1px $inputBackground solid;
+    padding: 15px 24px;
+
+    &__label {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    &__total {
+      font-size: 28px;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.report-wrong-answers {
+  &__item {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px $inputBackground solid;
+    border-radius: 5px;
+    margin: 5px;
+
+    &__character {
+      font-weight: bold;
+      font-size: 24px;
+    }
+  }
+}

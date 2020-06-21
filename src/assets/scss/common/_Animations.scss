@@ -1,0 +1,10 @@
+@keyframes pulse {
+  0% {
+    transform: none;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 1;
+  }
+}

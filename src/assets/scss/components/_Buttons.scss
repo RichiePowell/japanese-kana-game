@@ -1,0 +1,19 @@
+.button {
+  padding: 10px 20px;
+  background: $mainColor;
+  border-radius: 5px;
+  border: none;
+  user-select: none;
+  color: $white;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-weight: bold;
+
+  &:hover {
+    background: $mainColorHover;
+  }
+
+  &.start {
+    margin: 0 20px;
+  }
+}

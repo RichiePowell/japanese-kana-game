@@ -1,15 +1,25 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const ChangeGameTimer = ({ showWrongAnswerDialog, actions }) =>
-  <div className="input-row">
-    <label className="input-label">
-      <input type="checkbox"
-        id="showCorrectAnswer"
-        className="show"
-        checked={ showWrongAnswerDialog }
-        onChange={ (e) => { actions.toggleWrongAnswerDialog(e.target.checked) }} />
+const ToggleShowCorrectAnswer = ({ showWrongAnswerDialog, actions }) =>
+  <>
+    <input type="checkbox"
+      className="input-row__checkbox__input"
+      id="showCorrectAnswer"
+      checked={ showWrongAnswerDialog }
+      onChange={ (e) => { actions.toggleWrongAnswerDialog(e.target.checked) }} />
+    <label
+      className="input-row input-label"
+      htmlFor="showCorrectAnswer"
+    >
+      <div className="input-row__checkbox">
+        <FontAwesomeIcon
+          icon="check"
+          className="input-row__checkbox__check"
+        />
+      </div>
       Show correct answer after mistake
     </label>
-  </div>
+  </>
 
-export default ChangeGameTimer
+export default ToggleShowCorrectAnswer

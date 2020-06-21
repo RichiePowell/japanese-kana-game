@@ -1,5 +1,15 @@
-@import 'Variables';
-@import 'DarkMode';
+/* Common */
+@import './common/Variables';
+@import './common/Animations';
+@import './common/DarkMode';
+@import './common/Utilities';
+
+/* Components */
+@import './components/Header';
+@import './components/Buttons';
+@import './components/Game';
+@import './components/Report';
+@import './components/Timers';
 
 html,
 body {
@@ -42,6 +52,7 @@ a {
   border-radius: 5px;
   transition: 1s all ease;
   position: relative;
+  border: 1px transparent solid;
 }
 
 .start-screen {
@@ -64,10 +75,6 @@ a {
       margin-left: -30px;
       margin-right: -30px;
 
-      .options__box:last-child {
-        margin-bottom: 0;
-      }
-      
       svg:not(.fa-check) {
         margin-right: 5px;
         position: relative;
@@ -88,6 +95,10 @@ a {
 
         .fa-check {
           top: 7px;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
         }
       }
     }
@@ -115,24 +126,28 @@ a {
       letter-spacing: 2px;
       position: relative;
       margin-right: 10px;
+      margin-bottom: 10px;
       user-select: none;
+      position: relative;
 
-      &__label {
-        display: block;
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: 1px $inputBackground solid;
-        transition: 0.2s all ease;
-        cursor: pointer;
-
-        &:hover {
-          border-color: $inputBackgroundHover;
+      &__character {
+        &__label {
+          display: block;
+          padding: 10px 20px 25px 20px;
+          border-radius: 5px;
+          border: 1px $inputBackground solid;
+          transition: 0.2s all ease;
+          cursor: pointer;
+  
+          &:hover {
+            border-color: $inputBackgroundHover;
+          }
         }
-      }
       
-      &:nth-of-type(2) {
-        margin-right: 0;
-        float: right;
+        &:nth-of-type(2) {
+          margin-right: 0;
+          float: right;
+        }
       }
 
       &__check {
@@ -141,7 +156,7 @@ a {
         top: 5px;
         right: 5px;
         transition: 0.2s all ease;
-        background: #32CD32;
+        background: $mainColor;
         color: $white;
         border-radius: 998px;
         width: 15px;
@@ -159,194 +174,86 @@ a {
       }
     }
 
-    .options__sub {
+    &__sub {
       position: absolute;
       letter-spacing: 2px;
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       display: block;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      border: 1px $inputBackground solid;
+      background: $white;
+      padding: 3px 7px;
+      white-space: nowrap;
+      cursor: pointer;
 
-    }
-  }
-}
+      &__checkbox {
+        border-radius: 99px;
+        border: 1px $inputBackground solid;
+        height: 15px;
+        width: 15px;
+        line-height: 16px;
+        display: inline-block;
+        margin-right: 5px;
 
-.header {
-  margin-bottom: 30px;
-  user-select: none;
+        &__check {
+          color: $mainColor;
+          transform: scale(0);
+          // opacity: 0;
+          transition: 0.2s all ease;
+        }
 
-  h1 {
-    font-family: 'Kaushan Script';
-    font-size: 80px;
-    position: relative;
-    margin: 0;
+        &__input:checked + .options__sub {
+          .options__sub__checkbox {
+            &__check {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
+      }
 
-    span {
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      font-weight: 300;
-      margin: 0;
-      font-size: 16px;
-      position: absolute;
-      right: 0;
-      bottom: -5px;
-    }
-  }
-}
-
-.scores {
-  width: 100%;
-  user-select: none;
-
-  &__total {
-    position: absolute;
-    font-size: 18px;
-    text-align: center;
-    transition: .2s all ease;
-
-    &__correct span {
-      color: green;
-    }
-  
-    &__wrong {
-      right: 30px;
-  
-      span {
-        color: $mainColor;
+      &:hover {
+        border-color: $inputBackgroundHover;
       }
     }
-
-    span {
-      display: block;
-      font-weight: bold;
-      opacity: 0.5;
-    }
-
-    &__title {
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 10px;
-      margin-bottom: 3px;
-    }
-
-    &--active span {
-      animation: pulse 0.3s ease;
-    }
-
-    svg {
-      color: #999999;
-      display: block;
-      font-size: 16px;
-    }
-  }
-}
-
-.character {
-  font-size: 100px;
-  background: $mainColor;
-  color: $white;
-  border-radius: 9999px;
-  height: 250px;
-  line-height: 250px;
-  width: 250px;
-  margin: auto;
-  vertical-align: middle;
-  margin-bottom: 15px;
-  user-select: none;
-  text-align: center;
-}
-
-.input {
-  position: relative;
-
-  .answer {
-    background: $inputBackground;
-    font-size: 24px;
-    border: none;
-    width: 100%;
-    display: block;
-    padding: 10px 20px;
-    font-weight: 300;
-    box-sizing: border-box;
-    border-radius: 999px;
-    margin-bottom: 15px;
-  }
-  
-  .submit {
-    background: darken($inputBackground, 30);
-    position: absolute;
-    right: 7px;
-    top: 7px;
-    color: $white;
-    border: none;
-    border-radius: 999px;
-    padding: 10px 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: 0.1s all ease;
-
-    &:hover {
-      background: darken($inputBackground, 50);
-    }
-  }
-}
-
-.answer-options {
-  text-align: center;
-
-  button {
-    padding: 13px 0;
-    text-align: center;
-    width: 48px;
-    background: $inputBackground;
-    display: inline-block;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    border: 1px $inputBackground solid;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: 0.2s all ease;
-    cursor: pointer;
-
-    &:hover {
-      background: $inputBackgroundHover;
-    }
-
-    &:active {
-      background: $mainColor;
-      color: $white;
-      transform: scale(0.9);
-    }
-  }
-}
-
-.button {
-  padding: 10px 20px;
-  background: $mainColor;
-  border-radius: 5px;
-  border: none;
-  user-select: none;
-  color: $white;
-  cursor: pointer;
-  transition: 0.2s all ease;
-  font-weight: bold;
-
-  &:hover {
-    background: $mainColorHover;
-  }
-
-  &.start {
-    margin: 0 20px;
   }
 }
 
 .input-row {
-  margin-top: 10px;
+  display: block;
+  margin-bottom: 0 !important;
+  margin-top: 15px;
 
-  input[type="checkbox"] {
+  &__checkbox {
+    border-radius: 99px;
+    border: 1px $inputBackground solid;
+    height: 17px;
+    width: 17px;
+    line-height: 17px;
+    display: inline-block;
     margin-right: 5px;
-    position: relative;
-    top: 2px;
+    text-align: center;
+
+    &__check {
+      color: $white;
+      transform: scale(0);
+      opacity: 0;
+      transition: 0.2s all ease;
+    }
+
+    &__input:checked + .input-row {
+      .input-row__checkbox {
+        &__check {
+          color: $mainColor;
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
   }
 }
 
@@ -449,90 +356,9 @@ html body.swal2-height-auto {
   }
 }
 
-@keyframes pulse {
-  0% {
-    transform: none;
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 1;
-  }
-}
-
-.float-right {
-  float: right;
-}
-
-.show {
-  display: block !important;
-}
-
-.text-center {
-  text-align: center;
-}
-
 .start-block {
   > div {
     display: inline-block;
     width: 50%;
-  }
-}
-
-.countdown {
-  position: absolute;
-  margin-top: -265px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.game-timer {
-  position: absolute;
-  right: 30px;
-  user-select: none;
-  margin-top: -65px;
-
-  div {
-    color: #333 !important;
-    font-size: 18px;
-  }
-}
-
-.report-totals {
-  margin: 20px 0;
-
-  &__box {
-    display: inline-block;
-    border-right: 1px $inputBackground solid;
-    padding: 15px 24px;
-
-    &__label {
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 14px;
-    }
-
-    &__total {
-      font-size: 28px;
-    }
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-}
-
-.report-wrong-answers {
-  &__item {
-    display: inline-block;
-    padding: 8px 18px;
-    border: 1px $inputBackground solid;
-    border-radius: 5px;
-    margin: 5px;
-
-    &__character {
-      font-weight: bold;
-      font-size: 24px;
-    }
   }
 }

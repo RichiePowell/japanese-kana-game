@@ -16,6 +16,7 @@ body {
 
     .container {
       background: $darkModeBackground;
+      border: 1px $darkModeInputBorderColor solid;
     }
 
     .character {
@@ -72,15 +73,17 @@ body {
 
     .options {
       &__box {
-        &__label {
-          border-color: $darkModeInputBorderColor;
-          background: #222;
-  
-          &:hover {
-            border-color: $darkModeInputBorderColorHover;
+        &__character {
+          &__label {
+            border-color: $darkModeInputBorderColor;
+            background: #222;
+    
+            &:hover {
+              border-color: $darkModeInputBorderColorHover;
+            }
           }
         }
-  
+    
         &__check {
           background: $darkModeCheckActiveBackground;
           color: $darkModeCheckActiveTextColor;
@@ -93,6 +96,19 @@ body {
 
         svg:not(.fa-check).active {
           color: $darkModeCheckActiveBackground;
+        }
+      }
+
+      &__sub {
+        background: #222;
+        border-color: $darkModeInputBorderColor;
+
+        &__checkbox {
+          border-color: $darkModeInputBorderColor;
+
+          &__check {
+            color: $darkModeMainColor;
+          }
         }
       }
     }
@@ -151,4 +167,8 @@ body {
       }
     }
   }
+}
+
+.game-timer > div > div {
+  color: $darkModeTextColor !important;
 }
