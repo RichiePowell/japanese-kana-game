@@ -24,15 +24,17 @@ body {
     }
 
     .scores {
-      .correct {
-        span {
-          color: $darkModeScoresCorrectTextColor;
+      &__total {
+        &__correct {
+          span {
+            color: $darkModeScoresCorrectTextColor;
+          }
         }
-      }
-
-      .wrong {
-        span {
-          color: $darkModeScoresWrongTextColor;
+  
+        &__wrong {
+          span {
+            color: $darkModeScoresWrongTextColor;
+          }
         }
       }
     }
@@ -68,22 +70,24 @@ body {
       }
     }
 
-    .option-boxes {
-      .box {
-        border-color: $darkModeInputBorderColor;
-        background: #222;
-
-        &:hover {
-          border-color: $darkModeInputBorderColorHover;
+    .options {
+      &__box {
+        &__label {
+          border-color: $darkModeInputBorderColor;
+          background: #222;
+  
+          &:hover {
+            border-color: $darkModeInputBorderColorHover;
+          }
         }
-
-        .check {
+  
+        &__check {
           background: $darkModeCheckActiveBackground;
           color: $darkModeCheckActiveTextColor;
         }
       }
 
-      &.vertical {
+      &--highlight {
         background: #222;
         border-color: $darkModeInputBackground;
 
@@ -130,11 +134,11 @@ body {
       .swal2-content {
         color: $darkModeTextColor;
 
-        .report-totals--box {
+        .report-totals__box {
           border-color: $darkModeInputBorderColor;
         }
 
-        .report-wrong-answers--item {
+        .report-wrong-answers__item {
           border-color: $darkModeInputBorderColor;
         }
       }

@@ -53,10 +53,10 @@ a {
     }
   }
 
-  .option-boxes {
+  .options {
     user-select: none;
 
-    &.standout {
+    &--highlight {
       padding: 15px 30px;
       background: lighten($inputBackground, 7);
       border-top: 1px $inputBackground solid;
@@ -64,12 +64,10 @@ a {
       margin-left: -30px;
       margin-right: -30px;
 
-      .box:last-child {
+      .options__box:last-child {
         margin-bottom: 0;
       }
-    }
-
-    &.vertical {
+      
       svg:not(.fa-check) {
         margin-right: 5px;
         position: relative;
@@ -81,7 +79,7 @@ a {
         }
       }
 
-      .box {
+      .options__box {
         width: calc(100% - 40px);
         margin-bottom: 10px;
         letter-spacing: normal;
@@ -102,34 +100,42 @@ a {
       }
 
       &:checked + label {
-        .check {
+        .options__box__check {
           opacity: 1;
           transform: scale(1);
         }
       }
     }
 
-    .box {
+    &__box {
       display: inline-block;
       outline: none;
-      border-radius: 5px;
-      border: 1px $inputBackground solid;
-      padding: 10px 20px;
       text-align: center;
-      transition: 0.2s all ease;
       text-transform: uppercase;
       letter-spacing: 2px;
       position: relative;
-      cursor: pointer;
       margin-right: 10px;
       user-select: none;
+
+      &__label {
+        display: block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px $inputBackground solid;
+        transition: 0.2s all ease;
+        cursor: pointer;
+
+        &:hover {
+          border-color: $inputBackgroundHover;
+        }
+      }
       
       &:nth-of-type(2) {
         margin-right: 0;
         float: right;
       }
 
-      .check {
+      &__check {
         opacity: 0;
         position: absolute;
         top: 5px;
@@ -145,16 +151,21 @@ a {
         text-align: center;
       }
 
-      &:hover {
-        border-color: $inputBackgroundHover;
-      }
-
       span {
         font-weight: bold;
         display: block;
         margin-bottom: 5px;
         font-size: 32px;
       }
+    }
+
+    .options__sub {
+      position: absolute;
+      letter-spacing: 2px;
+      font-size: 12px;
+      text-transform: uppercase;
+      display: block;
+
     }
   }
 }
@@ -186,11 +197,23 @@ a {
   width: 100%;
   user-select: none;
 
-  > div {
+  &__total {
     position: absolute;
     font-size: 18px;
     text-align: center;
     transition: .2s all ease;
+
+    &__correct span {
+      color: green;
+    }
+  
+    &__wrong {
+      right: 30px;
+  
+      span {
+        color: $mainColor;
+      }
+    }
 
     span {
       display: block;
@@ -198,14 +221,14 @@ a {
       opacity: 0.5;
     }
 
-    .title {
+    &__title {
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 10px;
       margin-bottom: 3px;
     }
 
-    &.active span {
+    &--active span {
       animation: pulse 0.3s ease;
     }
 
@@ -213,18 +236,6 @@ a {
       color: #999999;
       display: block;
       font-size: 16px;
-    }
-  }
-
-  .correct span {
-    color: green;
-  }
-
-  .wrong {
-    right: 30px;
-
-    span {
-      color: $mainColor;
     }
   }
 }
@@ -490,18 +501,18 @@ html body.swal2-height-auto {
 .report-totals {
   margin: 20px 0;
 
-  &--box {
+  &__box {
     display: inline-block;
     border-right: 1px $inputBackground solid;
     padding: 15px 24px;
 
-    &--label {
+    &__label {
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 14px;
     }
 
-    &--total {
+    &__total {
       font-size: 28px;
     }
 
@@ -512,14 +523,14 @@ html body.swal2-height-auto {
 }
 
 .report-wrong-answers {
-  &--item {
+  &__item {
     display: inline-block;
     padding: 8px 18px;
     border: 1px $inputBackground solid;
     border-radius: 5px;
     margin: 5px;
 
-    &--character {
+    &__character {
       font-weight: bold;
       font-size: 24px;
     }

@@ -5,30 +5,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ChangeKana = () =>
   <Consumer>
     { ({ kana, actions }) => (
-      <div className="option-boxes">
-        <input type="checkbox"
-          id="Hiragana"
-          value="Hiragana"
-          checked={ kana.includes('Hiragana') ? "checked" : false }
-          onChange={ e => actions.toggleKana(e.target.value) }
-        />
-        <label htmlFor="Hiragana" className="box kana">
-          <span className="icon">あ</span>
-          Hiragana
+      <div className="options">
+        <div className="options__box">
+          <input type="checkbox"
+            id="Hiragana"
+            value="Hiragana"
+            checked={ kana.includes('Hiragana') }
+            onChange={ e => actions.toggleKana(e.target.value) }
+          />
+          <label htmlFor="Hiragana" className="options__box__label kana">
+            <span className="options__icon">あ</span>
+            Hiragana
+            <FontAwesomeIcon icon="check" className="options__box__check" />
+          </label>
           <FontAwesomeIcon icon="check" className="check" />
         </label>
+        </div>
 
-        <input type="checkbox"
-          id="Katakana"
-          value="Katakana"
-          checked={ kana.includes('Katakana')  ? "checked" : false }
-          onChange={ e => actions.toggleKana(e.target.value) }
-        />
-        <label htmlFor="Katakana" className="box kana">
-          <span className="icon">ア</span>
-          Katakana
+        <div className="options__box">
+          <input type="checkbox"
+            id="Katakana"
+            value="Katakana"
+            checked={ kana.includes('Katakana') }
+            onChange={ e => actions.toggleKana(e.target.value) }
+          />
+          <label htmlFor="Katakana" className="options__box__label kana">
+            <span className="options__icon">ア</span>
+            Katakana
+            <FontAwesomeIcon icon="check" className="options__box__check" />
+          </label>
           <FontAwesomeIcon icon="check" className="check" />
         </label>
+      </div>
       </div>
     )}
   </Consumer>

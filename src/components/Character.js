@@ -1,13 +1,8 @@
 import React from 'react'
-import { Consumer } from './context'
 
-const Character = () =>
-  <Consumer>
-    { context => (
-      <div className="character">
-        { context.currentCharacter }
-      </div>
-    )}
-  </Consumer>
+const Character = ({ currentCharacter }) =>
+  <div className="character">
+    { currentCharacter }
+  </div>
 
 export default Character

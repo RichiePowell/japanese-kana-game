@@ -20,7 +20,7 @@ export const Game = () =>
         <>
           <Header />
           <Score key={( context.correctAnswersTotal + context.wrongAnswersTotal )} />
-          <Character />
+          <Character currentCharacter={ context.currentCharacter } />
           { context.answerTimer > 0 ?
             <div className="countdown">
               <CountdownCircleTimer

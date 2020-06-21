@@ -4,7 +4,7 @@ import ChangeGameTimer from './ChangeGameTimer'
 import ToggleShowCorrectAnswer from './ToggleShowCorrectAnswer'
 
 const Options = ({ answerTimer, gameTimer, showWrongAnswerDialog, actions }) =>
-  <div className="option-boxes vertical standout">
+  <div className="options options--highlight">
     <ChangeAnswerTimer
       answerTimer={answerTimer}
       actions={actions} />
