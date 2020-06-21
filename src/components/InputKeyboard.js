@@ -23,6 +23,7 @@ const InputKeyboard = () => {
           onSubmit={ handleSubmit }
           >
             <input
+              id="answer-keyboard"
               name="answer"
               ref={answer}
               type="text"
