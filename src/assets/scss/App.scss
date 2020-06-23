@@ -8,12 +8,12 @@
 @import './components/Header';
 @import './components/Buttons';
 @import './components/Forms';
-@import './components/Game';
 @import './components/Report';
 @import './components/Timers';
 
 /* Pages */
 @import './pages/Start-Screen';
+@import './pages/Game';
 
 html,
 body {
