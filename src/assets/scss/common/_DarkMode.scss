@@ -103,7 +103,7 @@ body {
         background: #222;
         border-color: $darkModeInputBorderColor;
 
-        &:hover {
+        label:hover {
           border-color: $darkModeInputBorderColorHover;
 
           .options__sub__checkbox {

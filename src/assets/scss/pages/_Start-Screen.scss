@@ -77,7 +77,7 @@
      &__character {
        &__label {
          display: block;
-         padding: 10px 20px 25px 20px;
+         padding: 10px 20px 65px 20px;
          border-radius: 5px;
          border: 1px $inputBackground solid;
          transition: 0.2s all ease;
@@ -124,15 +124,25 @@
      font-size: 11px;
      text-transform: uppercase;
      display: block;
-     bottom: -11px;
+     bottom: 6px;
      left: 50%;
      transform: translateX(-50%);
      border-radius: 5px;
-     border: 1px $inputBackground solid;
-     background: $white;
      padding: 3px;
      white-space: nowrap;
-     cursor: pointer;
+     text-align: left;
+     
+     label {
+       display: block;
+       margin-bottom: 5px;
+       cursor: pointer;
+
+       &:hover {
+         .options__sub__checkbox {
+           border-color: $inputBackgroundHover;
+         }
+       }
+     }
 
      &__checkbox {
        border-radius: 99px;
@@ -141,6 +151,8 @@
        width: 15px;
        line-height: 16px;
        display: inline-block;
+       text-align: center;
+       transition: 0.2s all ease;
        margin-right: 5px;
 
        &__check {
@@ -150,21 +162,17 @@
          transition: 0.2s all ease;
        }
 
-       &__input:checked + .options__sub {
-         .options__sub__checkbox {
-           &__check {
-             opacity: 1;
-             transform: scale(1);
-           }
-         }
-       }
-     }
-
-     &:hover {
-       border-color: $inputBackgroundHover;
-     }
-   }
- }
+       &__input:checked + label {
+          .options__sub__checkbox {
+            &__check {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .input-row {

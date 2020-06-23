@@ -6,8 +6,10 @@ import { isMobile, isTablet } from 'react-device-detect'
 
 /* Character data */
 import Hiragana from './../../data/Hiragana'
+import HiraganaDakuten from './../../data/HiraganaDakuten'
 import HiraganaCombos from './../../data/HiraganaCombos'
 import Katakana from './../../data/Katakana'
+import KatakanaDakuten from './../../data/KatakanaDakuten'
 import KatakanaCombos from './../../data/KatakanaCombos'
 
 const GameData = React.createContext();
@@ -30,23 +32,31 @@ export class Provider extends Component {
     lastAnswerWas: '',
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
-    kana: ['Hiragana', 'Katakana'],
+    kana: ['Hiragana', 'HiraganaDakuten', 'Katakana', 'KatakanaDakuten'],
     kanaData: {
       'Hiragana' : {
         characters: Hiragana,
         group: 1
       },
+      'HiraganaDakuten' : {
+        characters: HiraganaDakuten,
+        group: 2
+      },
       'HiraganaCombos' : {
         characters: HiraganaCombos,
-        group: 2
+        group: 3
       },
       'Katakana' : {
         characters: Katakana,
         group: 1
       },
+      'KatakanaDakuten' : {
+        characters: KatakanaDakuten,
+        group: 2
+      },
       'KatakanaCombos' : {
         characters: KatakanaCombos,
-        group: 2
+        group: 3
       },
     },
     showWrongAnswerDialog: true,
