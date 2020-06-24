@@ -115,6 +115,11 @@ export class Provider extends Component {
           [prev.currentCharacter] : parseInt(prev.correctAnswers[prev.currentCharacter]) ? prev.correctAnswers[prev.currentCharacter] + 1 : 1
         }
       }));
+      
+      // Clear the answer text box if it's visible
+      if(this.state.keyboardMode) document.querySelector('#answer-keyboard').value = '';
+
+      // Load new character
       this.loadNewCharacter();
     }
   }

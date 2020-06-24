@@ -29,7 +29,6 @@ export const Game = () =>
                 size={250}
                 onComplete={() => {
                   context.actions.checkAnswer('Omae wa mou shindeiru');
-                  document.querySelector('#answer-keyboard').value = '';
                 }}
                 duration={ context.answerTimer }
                 colors={[ context.darkMode ? ['#ad4e4e'] : ['#e67272'] ]}
