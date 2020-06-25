@@ -51,7 +51,11 @@ export const Game = () =>
                 trailColor="#666"
                 strokeWidth={5}
               >
-                { ({remainingTime}) => remainingTime }
+                { ({remainingTime}) => 
+                  remainingTime > 60 ?
+                  Math.floor(remainingTime / 60) + 'm'
+                  : remainingTime
+                }
               </CountdownCircleTimer>
             </div>
             : ''
