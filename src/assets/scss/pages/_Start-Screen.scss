@@ -76,6 +76,7 @@
 
      &__character {
        &__label {
+         -webkit-tap-highlight-color: transparent;
          display: block;
          padding: 10px 20px 65px 20px;
          border-radius: 5px;
