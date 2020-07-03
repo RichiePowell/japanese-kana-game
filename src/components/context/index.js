@@ -106,7 +106,7 @@ export class Provider extends Component {
         this.loadNewCharacter();
       }
 
-    } else { /* Else, if it's right*/
+    } else { // Else, if it's right
       this.playSound('success');
       this.setState(prev => ({
         correctAnswersTotal: prev.correctAnswersTotal + 1,
@@ -177,8 +177,18 @@ export class Provider extends Component {
   toggleInput = () => this.setState(prev => ({ keyboardMode: !prev.keyboardMode }))
   
   toggleDarkMode = () => {
-    document.querySelector('body').classList.toggle('dark');
-    this.setState( prev => ({ darkMode: !prev.darkMode }));
+    this.setState( prev => ({ darkMode: !prev.darkMode }), () => {
+      window.localStorage.setItem('darkMode', this.state.darkMode);
+      this.handleDarkMode();
+    });
+  }
+
+  handleDarkMode = () => {
+    if(this.state.darkMode === true) {
+      document.querySelector('body').classList.add('dark');
+    } else {
+      document.querySelector('body').classList.remove('dark');
+    }
   }
 
   // Add or remove the passed kana set name to the kana array in the state
@@ -217,11 +227,11 @@ export class Provider extends Component {
 
   // Loads a new character
   loadNewCharacter = () => {
-    /* Pick a random character set from the selected sets */
+    // Pick a random character set from the selected sets
     const shuffledCharacterSets = shuffle(this.state.kana);
     const characterSet = shuffledCharacterSets.shift();
 
-    /* Assign the characters from the chosen set */
+    // Assign the characters from the chosen set
     const characters = this.state.kanaData[characterSet].characters;
     const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
     
@@ -255,7 +265,15 @@ export class Provider extends Component {
   }
 
   componentDidMount() {
-    this.loadKana();
+    // Check if darkMode was set previously
+    if(window.localStorage.getItem('darkMode')) {
+      this.setState({
+        darkMode: (window.localStorage.getItem('darkMode') === "true")
+      }, () => this.handleDarkMode())
+    }
+    
+    // Load the kana set
+    this.loadKana()
   }
 
   render() {
