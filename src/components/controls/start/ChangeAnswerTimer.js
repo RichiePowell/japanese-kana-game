@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ChangeAnswerTimer = ({ answerTimer, actions }) => {
 
   let items = []
-  for(let i = 1; i < 10; i++)
+  for(let i = 1; i <= 10; i++)
     items.push(<option value={i} key={i}>{i} second{ i > 1 ? 's' : '' }</option>)
 
   return (
