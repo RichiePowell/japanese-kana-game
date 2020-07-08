@@ -27,6 +27,8 @@ body {
   background: #e5e5e5 url(../images/bg.svg) no-repeat center center;
   background-size: cover;
   color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
