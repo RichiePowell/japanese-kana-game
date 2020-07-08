@@ -3,4 +3,5 @@ button,
 select {
   font-family: $fontFamily;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
