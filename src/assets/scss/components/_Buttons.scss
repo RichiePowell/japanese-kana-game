@@ -9,6 +9,8 @@
   transition: 0.2s all ease;
   text-transform: uppercase;
   letter-spacing: 2px;
+  display: inline-block;
+  font-size: 13px;
 
   &:hover {
     background: $mainColorHover;

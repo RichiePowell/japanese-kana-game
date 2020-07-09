@@ -12,7 +12,7 @@ import Katakana from './../../data/Katakana'
 import KatakanaDakuten from './../../data/KatakanaDakuten'
 import KatakanaCombos from './../../data/KatakanaCombos'
 
-const GameData = React.createContext();
+export const GameData = React.createContext()
 
 export class Provider extends Component {
   state = {

@@ -1,5 +1,9 @@
 import React from 'react'
 import { Consumer } from './components/context'
+import {
+  Switch,
+  Route
+} from 'react-router-dom'
 import WebFont from 'webfontloader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -23,11 +27,10 @@ const App = () =>
     { ({ gameStart }) => (
       <div className="App">
         <div className="container">
-          { gameStart ?
-            <Game />
-            :
-            <StartScreen />
-          }
+          <Switch>
+            <Route path="/" exact component={ StartScreen } />
+            <Route path="/play" exact component= { Game } />
+          </Switch>
         </div>
 
         <FontAwesomeIcon icon="spinner" spin className="loading" />

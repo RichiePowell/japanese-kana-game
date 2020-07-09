@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const StartButton = ({ actions }) =>
-  <button className="button start" onClick={ actions.startGame }>Start Game</button>
+const StartButton = () =>
+  <Link className="button start" to="/play">Start Game</Link>
 
 export default StartButton

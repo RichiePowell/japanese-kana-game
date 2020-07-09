@@ -1,5 +1,7 @@
 import React from 'react'
 import { Consumer } from './context'
+import SweetAlert from 'sweetalert2-react'
+import GameOverModalContent from './modals/GameOver'
 import Header from './Header'
 import ChangeKana from './controls/start/ChangeKana'
 import Options from './controls/start/Options'
@@ -9,24 +11,34 @@ import StartButton from './controls/start/StartButton'
 
 const StartScreen = () =>
   <Consumer>
-    { ({ actions, kana, answerTimer, gameTimer, showWrongAnswerDialog, sound }) => (
+    { context => (
       <div className="start-screen">
         <Header />
         <ChangeKana
-          kana={kana}
-          actions={actions} />
+          kana={context.kana}
+          actions={context.actions} />
         <Options
-          answerTimer={answerTimer}
-          gameTimer={gameTimer}
-          showWrongAnswerDialog={showWrongAnswerDialog}
-          actions={actions} />
+          answerTimer={context.answerTimer}
+          gameTimer={context.gameTimer}
+          showWrongAnswerDialog={context.showWrongAnswerDialog}
+          actions={context.actions} />
         <div className="text-center">
           <Audio
-            sound={sound}
-            actions={actions} />
-          <StartButton actions={actions} />
-          <DarkMode actions={actions} />
+            sound={context.sound}
+            actions={context.actions} />
+          <StartButton actions={context.actions} />
+          <DarkMode actions={context.actions} />
         </div>
+        <SweetAlert
+          show={ context.showReport }
+          title="Game Over!"
+          onConfirm={() => {
+              context.actions.toggleReport()
+              context.actions.clearStats()
+            }
+          }
+          html={ GameOverModalContent(context) }
+        />
       </div>
     )}
   </Consumer>

@@ -127,7 +127,9 @@
 
 .controls {
   .input-control {
+    display: inline-block;
     margin-right: 10px;
+    color: #333;
  
     &:last-child {
       margin-right: 0;
