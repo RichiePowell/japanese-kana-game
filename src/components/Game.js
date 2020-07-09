@@ -20,9 +20,8 @@ export const Game = () => {
     context.actions.startGame()
 
     // ... and end it on unmount
-    return () => {
-      context.actions.endGame();
-    }
+    return () => context.actions.endGame();
+    
     // eslint-disable-next-line
   }, [])
 
