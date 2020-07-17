@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 /* Third Party */
 import SweetAlert from 'sweetalert2-react'
@@ -14,11 +15,11 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 export const Game = () => {
   const context = useContext(GameData);
+  let history = useHistory();
 
   // Use hooks to start the game on mount
   useEffect(() => {
     context.actions.startGame()
-
     // ... and end it on unmount
     return () => context.actions.endGame();
     
@@ -53,7 +54,7 @@ export const Game = () => {
             key={ context.gameTimerKey }
             size={50}
             onComplete={() => {
-              context.actions.endGame()
+              history.push("/")
             }}
             duration={ context.gameTimer }
             colors={[['#ccc']]}
