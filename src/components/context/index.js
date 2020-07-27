@@ -139,8 +139,6 @@ export class Provider extends Component {
   playSound = (sound) => {
     if(this.state.sound) {
       this.audio[sound].file.volume = this.audio[sound].volume ?? 1; // Check if we set the volume manually above
-
-      console.log(this.audio[sound].file.volume);
       this.audio[sound].file.currentTime = 0; // Reset to audio beginning if it's already playing
       this.audio[sound].file.play();
     }
