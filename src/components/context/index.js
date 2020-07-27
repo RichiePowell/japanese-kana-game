@@ -74,10 +74,22 @@ export class Provider extends Component {
 
   // Set audio files
   audio = {
-    'success' : new Audio('success.ogg'),
-    'error' : new Audio('error.ogg'),
-    'gameOver' : new Audio('gameOver.ogg'),
-    'gameOverBad' : new Audio('gameOverBad.ogg')
+    'success': {
+      'file': new Audio('success.ogg'),
+      'volume': 0.5
+    },
+    'error': {
+      'file': new Audio('error.ogg'),
+      'volume': 0.5
+    },
+    'gameOver': {
+      'file': new Audio('gameOver.ogg'),
+      'volume': 0.5
+    },
+    'gameOverBad': {
+      'file': new Audio('gameOverBad.ogg'),
+      'volume': 0.2
+    },
   }
 
   checkAnswer = (answer) => {
@@ -126,9 +138,11 @@ export class Provider extends Component {
 
   playSound = (sound) => {
     if(this.state.sound) {
-      this.audio[sound].volume = 0.5; // Set volume to half because we want subtle sounds
-      this.audio[sound].currentTime = 0; // Reset to audio beginning if it's already playing
-      this.audio[sound].play();
+      this.audio[sound].file.volume = this.audio[sound].volume ?? 1; // Check if we set the volume manually above
+
+      console.log(this.audio[sound].file.volume);
+      this.audio[sound].file.currentTime = 0; // Reset to audio beginning if it's already playing
+      this.audio[sound].file.play();
     }
   }
 
