@@ -114,9 +114,7 @@ export class Provider extends Component {
         }
       }));
       
-      if(!this.state.showWrongAnswerDialog) {
-        this.loadNewCharacter();
-      }
+      if(!this.state.showWrongAnswerDialog) this.loadNewCharacter();
 
     } else { // Else, if it's right
       this.playSound('success');
@@ -163,11 +161,8 @@ export class Provider extends Component {
     } else {
       this.toggleReport();
       
-      if(this.state.wrongAnswersTotal > this.state.correctAnswersTotal) {
-        this.playSound('gameOverBad');
-      } else {
-        this.playSound('gameOver');
-      }
+      // If the total number of wrong answers is more than correct answers, play the 'bad game over' sound
+      this.playSound(this.state.wrongAnswersTotal > this.state.correctAnswersTotal ? 'gameOverBad' : 'gameOver');
     }
   }
 
