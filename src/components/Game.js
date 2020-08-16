@@ -26,6 +26,20 @@ export const Game = () => {
     // eslint-disable-next-line
   }, [])
 
+  const getAnswerCorrection = () => {
+    let matchingCharacters = [];
+
+    Object.keys(context.kanaData).forEach(kana => {
+      Object.keys(context.kanaData[kana].characters).forEach(char => {
+        if(context.kanaData[kana].characters[char] === context.currentUserAnswer) {
+          matchingCharacters.push( char );
+        }
+      })
+    })
+    
+    return matchingCharacters;
+  }
+
   return (
     <>
       <Header />
@@ -81,6 +95,7 @@ export const Game = () => {
             context.actions.loadNewCharacter()
           }
         }
+        html={ context.currentUserAnswer + ' is ' + getAnswerCorrection().join(', ') }
       />
     </>
   )

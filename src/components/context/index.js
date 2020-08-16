@@ -99,6 +99,9 @@ export class Provider extends Component {
     // If the answer is blank, do nothing
     if(userAnswer === '') return false;
 
+    // Add the user answer to the state
+    this.setState({ currentUserAnswer : userAnswer });
+    
     // If answer is wrong
     if(
       (Array.isArray(currentAnswer) && !currentAnswer.includes(userAnswer))
@@ -234,6 +237,9 @@ export class Provider extends Component {
 
   // Loads a new character
   loadNewCharacter = () => {
+    // Reset current user answer
+    this.setState({ currentUserAnswer: false });
+
     // Pick a random character set from the selected sets
     const shuffledCharacterSets = shuffle(this.state.kana);
     const characterSet = shuffledCharacterSets.shift();
@@ -297,12 +303,14 @@ export class Provider extends Component {
         currentAnswer: this.state.currentAnswer,
         currentAnswerPrintable: this.state.currentAnswerPrintable,
         correctAnswersTotal: this.state.correctAnswersTotal,
+        currentUserAnswer: this.state.currentUserAnswer,
         wrongAnswers: this.state.wrongAnswers,
         wrongAnswersTotal: this.state.wrongAnswersTotal,
         lastAnswerWas: this.state.lastAnswerWas,
         keyboardMode: this.state.keyboardMode,
         sound: this.state.sound,
         kana: this.state.kana,
+        kanaData: this.state.kanaData,
         answerTimer: this.state.answerTimer,
         answerTimerKey: this.state.answerTimerKey,
         answerTimerTicking: this.state.answerTimerTicking,
