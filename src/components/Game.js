@@ -95,7 +95,7 @@ export const Game = () => {
             context.actions.loadNewCharacter()
           }
         }
-        html={ context.currentUserAnswer + ' is ' + getAnswerCorrection().join(', ') }
+        html={ context.currentUserAnswer !== 'omae wa mou shindeiru' ? context.currentUserAnswer + ' is ' + getAnswerCorrection().join(', ') : '' }
       />
     </>
   )

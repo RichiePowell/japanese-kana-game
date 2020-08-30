@@ -40,15 +40,15 @@ export class Provider extends Component {
       },
       'HiraganaDakuten' : {
         characters: HiraganaDakuten,
-        group: 2
+        group: 1
       },
       'HiraganaCombos' : {
         characters: HiraganaCombos,
-        group: 3
+        group: 1
       },
       'Katakana' : {
         characters: Katakana,
-        group: 1
+        group: 2
       },
       'KatakanaDakuten' : {
         characters: KatakanaDakuten,
@@ -56,7 +56,7 @@ export class Provider extends Component {
       },
       'KatakanaCombos' : {
         characters: KatakanaCombos,
-        group: 3
+        group: 2
       },
     },
     showWrongAnswerDialog: true,
@@ -100,7 +100,10 @@ export class Provider extends Component {
     if(userAnswer === '') return false;
 
     // Add the user answer to the state
-    this.setState({ currentUserAnswer : userAnswer });
+    this.setState({ currentUserAnswer : userAnswer })
+
+    // Stop the timer
+    this.stopAnswerTimer()
     
     // If answer is wrong
     if(
@@ -263,7 +266,7 @@ export class Provider extends Component {
       if(answerOptions.length < 5 && answer !== characters[char]) {
         answerOptions.push(characters[char]);
       }
-    });
+    })
     
     // Update the state with new character's data
     this.setState({
@@ -272,7 +275,10 @@ export class Provider extends Component {
       currentAnswerPrintable: answerPrintable,
       answerOptions: shuffle(answerOptions),
       answerTimerKey: character
-    });
+    })
+
+    // Start the answer timer
+    this.startAnswerTimer()
 
     return character;
   }
