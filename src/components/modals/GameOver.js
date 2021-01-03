@@ -8,6 +8,14 @@ const GameOverModalContent = (data) => {
     return `${minutesOutput} ${secondsOutput}`;
   }
 
+  const answerTime = () => {
+    const totalSeconds = Math.floor(((data.gameFinishTime - data.gameStartTime) / 1000) / (data.wrongAnswersTotal + data.correctAnswersTotal));
+    const minutes = Math.floor((totalSeconds / 60));
+    const minutesOutput = minutes > 0 ? `${minutes}m` : '';
+    const secondsOutput = `${Math.floor(totalSeconds - (minutes * 60))}s`;
+    return `${minutesOutput} ${secondsOutput}`;
+  }
+
   const wrongAnswers = Object.keys(data.wrongAnswers);
   let wrongAnswersOutput = [];
 
@@ -30,6 +38,10 @@ const GameOverModalContent = (data) => {
       <div class="report-totals__box time">
         <div class="report-totals__box__label">Time</div>
         <div class="report-totals__box__total">${ gameTime() }</div>
+      </div>
+      <div class="report-totals__box time">
+        <div class="report-totals__box__label">Avg. Answer</div>
+        <div class="report-totals__box__total">${ answerTime() }</div>
       </div>
       <div class="report-totals__box">
         <div class="report-totals__box__label">Correct</div>
