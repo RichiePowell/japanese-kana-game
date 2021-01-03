@@ -12,10 +12,10 @@ import Game from './components/Game'
 import StartScreen from './components/StartScreen'
 import './assets/scss/App.scss'
 
-/* Add FontAwesome icons via library */
+// Add FontAwesome icons via library
 library.add(faVolumeUp, faVolumeMute, faSpinner, faCheck, faTimes, faInfinity, faStopwatch, faClock, faAdjust)
 
-/* Add web fonts */
+// Add web fonts
 WebFont.load({
   google: {
     families: ['Kaushan Script', 'Source Sans Pro']

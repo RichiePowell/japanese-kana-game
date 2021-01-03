@@ -221,12 +221,11 @@ export class Provider extends Component {
   toggleWrongAnswerDialog = () => this.setState( prev => ({ showWrongAnswerDialog: !prev.showWrongAnswerDialog }))
   hideWrongAnswerDialog = () => this.setState({ wrongAnswerDialogActive: false })
 
-  toggleReport = () => {
+  toggleReport = () =>
     this.setState( prev => ({
       showReport: !prev.showReport,
       wrongAnswerDialogActive: false
     }));
-  }
 
   // Loads the kana based on the current kana state
   loadKana = () => {
@@ -252,9 +251,8 @@ export class Provider extends Component {
     const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
     
     // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of characters that's being loaded so it doesn't appear twice in a row
-    if(this.state.currentCharacter.length) {
+    if(this.state.currentCharacter.length)
       shuffledCharacters.splice(shuffledCharacters.indexOf(this.state.currentCharacter), 1)
-    }
 
     const character = shuffledCharacters.shift(); // Grab the first one
     const answer = characters[character]; // Grab the answer
