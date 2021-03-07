@@ -4,14 +4,16 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    content:'';
+    content: "";
   }
 
   &.dark {
     color: $darkModeTextColor;
 
     &:before {
-      background: rgba(0,0,0,.7);
+      background: rgba(0, 0, 0, 0.7);
+      background-attachment: fixed;
+      position: fixed;
     }
 
     .container {
@@ -31,7 +33,7 @@ body {
             color: $darkModeScoresCorrectTextColor;
           }
         }
-  
+
         &__wrong {
           span {
             color: $darkModeScoresWrongTextColor;
@@ -52,7 +54,6 @@ body {
 
         &:hover {
           background: lighten($darkModeAnswerButtonBackground, 12);
-          // border-color: $darkModeAnswerButtonBorderColorHover;
         }
       }
     }
@@ -73,20 +74,33 @@ body {
 
     .options {
       &__box {
+        border-color: $darkModeInputBorderColor !important;
+
+        &:hover {
+          background: #222 !important;
+        }
+
         &__character {
           &__label {
-            border-color: $darkModeInputBorderColor;
-            background: #222;
-    
             &:hover {
               border-color: $darkModeInputBorderColorHover;
             }
           }
         }
-    
+
         &__check {
           background: $darkModeCheckActiveBackground;
           color: $darkModeCheckActiveTextColor;
+        }
+      }
+
+      &--rows {
+        .options__box {
+          background: $darkModeBackground;
+
+          &--checked {
+            background: #222;
+          }
         }
       }
 

@@ -1,19 +1,22 @@
 /* Common */
-@import './common/Variables';
-@import './common/Animations';
-@import './common/DarkMode';
-@import './common/Utilities';
+@import "./common/Variables";
+@import "./common/Animations";
+@import "./common/DarkMode";
+@import "./common/Utilities";
 
 /* Components */
-@import './components/Header';
-@import './components/Buttons';
-@import './components/Forms';
-@import './components/Report';
-@import './components/Timers';
+@import "./components/Header";
+@import "./components/Buttons";
+@import "./components/Forms";
+@import "./components/Report";
+@import "./components/Timers";
 
 /* Pages */
-@import './pages/Start-Screen';
-@import './pages/Game';
+@import "./pages/Start-Screen";
+@import "./pages/Game";
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
 
 html,
 body {
@@ -26,9 +29,14 @@ body {
   font-family: $fontFamily;
   background: #e5e5e5 url(../images/bg.svg) no-repeat center center;
   background-size: cover;
+  background-attachment: fixed;
   color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: $breakpoint-mobile) {
+    background-image: none;
+  }
 }
 
 #root {
@@ -63,7 +71,7 @@ a {
 
 /* Override SweetAlert class that causes container box to lose central positioning */
 html body.swal2-height-auto {
-  height: 100%!important;
+  height: 100% !important;
 }
 
 /* Combat flash of unstyled text */

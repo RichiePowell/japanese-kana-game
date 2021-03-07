@@ -29,9 +29,9 @@ export const Game = () => {
   const getAnswerCorrection = () => {
     let matchingCharacters = [];
 
-    Object.keys(context.kanaData).forEach(kana => {
-      Object.keys(context.kanaData[kana].characters).forEach(char => {
-        if(context.kanaData[kana].characters[char] === context.currentUserAnswer) {
+    Object.keys(context.kana).forEach(kana => {
+      Object.keys(context.kana[kana].characters).forEach(char => {
+        if(context.kana[kana].characters[char] === context.currentUserAnswer) {
           matchingCharacters.push( char );
         }
       })
@@ -95,7 +95,7 @@ export const Game = () => {
             context.actions.loadNewCharacter()
           }
         }
-        html={ context.currentUserAnswer !== 'omae wa mou shindeiru' ? context.currentUserAnswer + ' is ' + getAnswerCorrection().join(', ') : '' }
+        html={ context.currentUserAnswer !== 'Omae wa mou shindeiru' ? context.currentUserAnswer + ' is ' + getAnswerCorrection().join(', ') : '' }
       />
     </>
   )

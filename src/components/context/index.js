@@ -11,6 +11,7 @@ import HiraganaCombos from './../../data/HiraganaCombos'
 import Katakana from './../../data/Katakana'
 import KatakanaDakuten from './../../data/KatakanaDakuten'
 import KatakanaCombos from './../../data/KatakanaCombos'
+import NumbersKanji from './../../data/NumbersKanji'
 
 export const GameData = React.createContext()
 
@@ -32,33 +33,16 @@ export class Provider extends Component {
     lastAnswerWas: '',
     keyboardMode: isMobile || isTablet ? false : true,
     sound: true,
-    kana: ['Hiragana', 'HiraganaDakuten', 'Katakana', 'KatakanaDakuten'],
-    kanaData: {
-      'Hiragana' : {
-        characters: Hiragana,
-        group: 1
-      },
-      'HiraganaDakuten' : {
-        characters: HiraganaDakuten,
-        group: 1
-      },
-      'HiraganaCombos' : {
-        characters: HiraganaCombos,
-        group: 1
-      },
-      'Katakana' : {
-        characters: Katakana,
-        group: 2
-      },
-      'KatakanaDakuten' : {
-        characters: KatakanaDakuten,
-        group: 2
-      },
-      'KatakanaCombos' : {
-        characters: KatakanaCombos,
-        group: 2
-      },
+    kana: {
+      'Hiragana' : Hiragana,
+      'HiraganaDakuten' : HiraganaDakuten,
+      'HiraganaCombos' : HiraganaCombos,
+      'Katakana' : Katakana,
+      'KatakanaDakuten' : KatakanaDakuten,
+      'KatakanaCombos' : KatakanaCombos,
+      'NumbersKanji' : NumbersKanji,
     },
+    kanaSelected: ['Hiragana', 'HiraganaDakuten', 'Katakana', 'KatakanaDakuten'],
     showWrongAnswerDialog: true,
     wrongAnswerDialogActive: false,
     showReport: false,
@@ -206,14 +190,14 @@ export class Provider extends Component {
 
   // Add or remove the passed kana set name to the kana array in the state
   toggleKana = (kana) => {
-    let newKana = this.state.kana;
-    if(!newKana.includes(kana)) {
-      newKana.push(kana);
-    } else if(newKana.length > 1) {
-      newKana.splice(newKana.indexOf(kana), 1);
+    let newKanaSelection = this.state.kanaSelected;
+    if(!newKanaSelection.includes(kana)) {
+      newKanaSelection.push(kana);
+    } else if(newKanaSelection.length > 1) {
+      newKanaSelection.splice(newKanaSelection.indexOf(kana), 1);
     }
     
-    this.setState({ kana: newKana }, this.loadKana)
+    this.setState({ kanaSelected: newKanaSelection }, this.loadKana)
   }
 
   changeAnswerTimer = (seconds) => this.setState({ answerTimer: parseInt(seconds) })
@@ -232,7 +216,7 @@ export class Provider extends Component {
     // Create an empty object for new character set
     let newCharacterSet = {};
     // Go through each selected kana and insert it into the new character set object
-    this.state.kana.forEach((kana) => newCharacterSet = {...newCharacterSet, ...this.state.kanaData[kana].characters})
+    Object.keys(this.state.kana).forEach((kana) => newCharacterSet = {...newCharacterSet, ...this.state.kana[kana].characters})
     // Insert the new character set into the state
     this.setState({ characters: newCharacterSet });
   }
@@ -243,14 +227,16 @@ export class Provider extends Component {
     this.setState({ currentUserAnswer: false });
 
     // Pick a random character set from the selected sets
-    const shuffledCharacterSets = shuffle(this.state.kana);
+    const shuffledCharacterSets = shuffle(this.state.kanaSelected);
     const characterSet = shuffledCharacterSets.shift();
 
     // Assign the characters from the chosen set
-    const characters = this.state.kanaData[characterSet].characters;
+    const characters = this.state.kana[characterSet].characters;
     const shuffledCharacters = shuffle(Object.keys(characters)); // Shuffle the kana characters
     
-    // If the currentCharacter isn't empty (e.g. it's the first answer) then delete it from the new set of characters that's being loaded so it doesn't appear twice in a row
+    // If the currentCharacter isn't empty (e.g. it's the first answer) then
+    // delete it from the new set of characters that's being loaded so it
+    // doesn't appear twice in a row
     if(this.state.currentCharacter.length)
       shuffledCharacters.splice(shuffledCharacters.indexOf(this.state.currentCharacter), 1)
 
@@ -282,6 +268,7 @@ export class Provider extends Component {
   }
 
   componentDidMount() {
+    console.log(NumbersKanji)
     // Check if darkMode was set previously
     if(window.localStorage.getItem('darkMode')) {
       this.setState({
@@ -314,7 +301,7 @@ export class Provider extends Component {
         keyboardMode: this.state.keyboardMode,
         sound: this.state.sound,
         kana: this.state.kana,
-        kanaData: this.state.kanaData,
+        kanaSelected: this.state.kanaSelected,
         answerTimer: this.state.answerTimer,
         answerTimerKey: this.state.answerTimerKey,
         answerTimerTicking: this.state.answerTimerTicking,

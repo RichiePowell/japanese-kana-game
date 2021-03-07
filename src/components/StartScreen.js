@@ -16,6 +16,7 @@ const StartScreen = () =>
         <Header />
         <ChangeKana
           kana={context.kana}
+          kanaSelected={context.kanaSelected}
           actions={context.actions} />
         <Options
           answerTimer={context.answerTimer}

@@ -4,95 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ChangeKana = () =>
   <Consumer>
-    { ({ kana, actions }) => (
-      <div className="options">
-        <div className="options__box options__box__character">
-          <input type="checkbox"
-            id="Hiragana"
-            value="Hiragana"
-            checked={ kana.includes('Hiragana') }
-            onChange={ e => actions.toggleKana(e.target.value) }
-          />
-          <label htmlFor="Hiragana" className="options__box__character__label kana">
-            <span className="options__box__character__icon">あ</span>
-            Hiragana
-            <FontAwesomeIcon icon="check" className="options__box__check" />
-          </label>
-
-          <div className="options__sub">
+    { ({ kana, kanaSelected, actions }) => (
+      <div className="options options--rows">
+        { Object.keys(kana).map( kanaSet => (
+          <div className={ 'options__box options__box__character' + (kanaSelected.includes(kanaSet) ? ' options__box--checked' : '') }>
             <input type="checkbox"
-              id="HiraganaDakuten"
-              value="HiraganaDakuten"
-              checked={ kana.includes('HiraganaDakuten')}
+              id={ kana[kanaSet].name }
+              value={ kanaSet }
+              checked={ kanaSelected.includes(kanaSet) }
               onChange={ e => actions.toggleKana(e.target.value) }
-              className="options__sub__checkbox__input"
             />
-            <label htmlFor="HiraganaDakuten">
-              <div className="options__sub__checkbox">
-                <FontAwesomeIcon icon="check" className="options__sub__checkbox__check" />
+            <label htmlFor={ kana[kanaSet].name } className="options__box__character__label kana">
+              <div className={ 'options__box__character__icon' + (kana[kanaSet].icon.length > 1 ? ' options__box__character__icon--combo' : '') }>{ kana[kanaSet].icon }</div>
+              <div className="options__box__character__details">
+                <h2>{ kana[kanaSet].name }</h2>
+                { kana[kanaSet].description && <p>{kana[kanaSet].description}</p> }
+                <FontAwesomeIcon icon="check" className="options__box__check" />
               </div>
-              Dakuten
-            </label>
-
-            <input type="checkbox"
-              id="HiraganaCombos"
-              value="HiraganaCombos"
-              checked={ kana.includes('HiraganaCombos')}
-              onChange={ e => actions.toggleKana(e.target.value) }
-              className="options__sub__checkbox__input"
-            />
-            <label htmlFor="HiraganaCombos">
-              <div className="options__sub__checkbox">
-                <FontAwesomeIcon icon="check" className="options__sub__checkbox__check" />
-              </div>
-              Combos
             </label>
           </div>
-        </div>
-
-        <div className="options__box options__box__character">
-          <input type="checkbox"
-            id="Katakana"
-            value="Katakana"
-            checked={ kana.includes('Katakana') }
-            onChange={ e => actions.toggleKana(e.target.value) }
-          />
-          <label htmlFor="Katakana" className="options__box__character__label kana">
-            <span className="options__box__character__icon">ア</span>
-            Katakana
-            <FontAwesomeIcon icon="check" className="options__box__check" />
-          </label>
-
-          <div className="options__sub">
-            <input type="checkbox"
-              id="KatakanaDakuten"
-              value="KatakanaDakuten"
-              checked={ kana.includes('KatakanaDakuten')}
-              onChange={ e => actions.toggleKana(e.target.value) }
-              className="options__sub__checkbox__input"
-            />
-            <label htmlFor="KatakanaDakuten">
-              <div className="options__sub__checkbox">
-                <FontAwesomeIcon icon="check" className="options__sub__checkbox__check" />
-              </div>
-              Dakuten
-            </label>
-
-            <input type="checkbox"
-              id="KatakanaCombos"
-              value="KatakanaCombos"
-              checked={ kana.includes('KatakanaCombos')}
-              onChange={ e => actions.toggleKana(e.target.value) }
-              className="options__sub__checkbox__input"
-            />
-            <label htmlFor="KatakanaCombos">
-              <div className="options__sub__checkbox">
-                <FontAwesomeIcon icon="check" className="options__sub__checkbox__check" />
-              </div>
-              Combos
-            </label>
-          </div>
-        </div>
+        ))}
       </div>
     )}
   </Consumer>
