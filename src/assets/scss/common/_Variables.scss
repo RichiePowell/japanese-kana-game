@@ -1,12 +1,14 @@
-$fontFamily: 'Source Sans Pro', Sans-serif;
+$fontFamily: "Source Sans Pro", Sans-serif;
 $mainColor: rgba(200, 50, 50, 1);
 $mainColorHover: darken($mainColor, 20);
 $white: #fff;
-$green: #32CD32;
+$green: #32cd32;
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
 
 $inputBackground: #e5e5e5;
 $inputBackgroundHover: darken(#e5e5e5, 10);
-
 
 /* Dark Mode */
 $darkModeMainColor: #883434;

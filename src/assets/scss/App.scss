@@ -15,9 +15,6 @@
 @import "./pages/Start-Screen";
 @import "./pages/Game";
 
-$breakpoint-tablet: 768px;
-$breakpoint-mobile: 480px;
-
 html,
 body {
   min-height: 100%;
@@ -33,6 +30,7 @@ body {
   color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
 
   @media (max-width: $breakpoint-mobile) {
     background: #fff;

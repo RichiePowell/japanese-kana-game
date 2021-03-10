@@ -7,6 +7,19 @@
     }
   }
 
+  .characters-header {
+    margin: 0 -31px;
+    margin-right: -31px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    padding: 10px 0;
+    background: lighten($inputBackground, 7);
+    border-top: 1px $inputBackground solid;
+    border-bottom: 1px $inputBackground solid;
+  }
+
   .options {
     user-select: none;
     transition: 0.2s all ease;
@@ -51,23 +64,29 @@
       margin: 0;
       margin-left: -31px;
       margin-right: -31px;
-      display: grid;
+      max-height: 312px;
+      overflow: auto;
+
+      @media (max-width: $breakpoint-mobile) {
+        height: calc(100vh - 369px);
+        max-height: none;
+        overflow: auto;
+      }
 
       .options__box {
         display: block;
         text-align: left;
-        border-top: 1px $inputBackgroundHover solid;
+        border-top: 1px $inputBackground solid;
         transition: 0.2s all ease;
         margin-bottom: 0;
         background: lighten($inputBackground, 3);
 
-        &:hover {
-          background: $inputBackground;
+        &:first-child {
+          border-top: none;
         }
 
         &--checked {
           background: inherit;
-          border-top-color: $inputBackground;
         }
       }
     }
@@ -154,62 +173,6 @@
         padding: 5px;
         height: 15px;
         text-align: center;
-      }
-    }
-
-    &__sub {
-      position: absolute;
-      letter-spacing: 2px;
-      font-size: 11px;
-      text-transform: uppercase;
-      display: block;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 5px;
-      -webkit-tap-highlight-color: transparent;
-      padding: 3px;
-      white-space: nowrap;
-      text-align: left;
-
-      label {
-        display: block;
-        margin-bottom: 5px;
-        cursor: pointer;
-
-        &:hover {
-          .options__sub__checkbox {
-            border-color: $inputBackgroundHover;
-          }
-        }
-      }
-
-      &__checkbox {
-        border-radius: 99px;
-        border: 1px $inputBackground solid;
-        height: 15px;
-        width: 15px;
-        line-height: 16px;
-        display: inline-block;
-        text-align: center;
-        transition: 0.2s all ease;
-        margin-right: 5px;
-
-        &__check {
-          color: $mainColor;
-          transform: scale(0) translateY(-50%);
-          // opacity: 0;
-          transition: 0.2s all ease;
-        }
-
-        &__input:checked + label {
-          .options__sub__checkbox {
-            &__check {
-              opacity: 1;
-              transform: scale(1) translateY(-50%);
-            }
-          }
-        }
       }
     }
   }

@@ -9,15 +9,18 @@ body {
 
   &.dark {
     color: $darkModeTextColor;
+    background: #222;
 
-    &:before {
-      background: rgba(0, 0, 0, 0.7);
-      background-attachment: fixed;
-      position: fixed;
+    @media (min-width: $breakpoint-mobile) {
+      &:before {
+        background: rgba(0, 0, 0, 0.7);
+        background-attachment: fixed;
+        position: fixed;
+      }
     }
 
     .container {
-      background: $darkModeBackground;
+      background: #222;
       border: 1px $darkModeInputBorderColor solid;
     }
 
@@ -75,10 +78,6 @@ body {
     .options {
       &__box {
         border-color: $darkModeInputBorderColor !important;
-
-        &:hover {
-          background: #222 !important;
-        }
 
         &__character {
           &__label {
@@ -158,6 +157,11 @@ body {
           background: $darkModeInputAltBackgroundHover;
           border-color: $darkModeInputAltBorderColorHover;
         }
+      }
+
+      .characters-header {
+        background: #222;
+        border-color: $darkModeInputBorderColor;
       }
     }
 

@@ -14,6 +14,7 @@ const StartScreen = () =>
     { context => (
       <div className="start-screen">
         <Header />
+        <div className="characters-header">Choose what to practice (scrollable)</div>
         <ChangeKana
           kana={context.kana}
           kanaSelected={context.kanaSelected}
