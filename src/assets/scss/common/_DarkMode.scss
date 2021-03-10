@@ -9,7 +9,10 @@ body {
 
   &.dark {
     color: $darkModeTextColor;
-    background: #222;
+
+    @media (max-width: $breakpoint-mobile) {
+      background: #222;
+    }
 
     @media (min-width: $breakpoint-mobile) {
       &:before {
@@ -21,7 +24,10 @@ body {
 
     .container {
       background: #222;
-      border: 1px $darkModeInputBorderColor solid;
+
+      @media (min-width: $breakpoint-mobile) {
+        border: 1px $darkModeInputBorderColor solid;
+      }
     }
 
     .character {
