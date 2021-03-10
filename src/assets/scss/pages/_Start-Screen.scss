@@ -13,6 +13,7 @@
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
+    user-select: none;
     font-size: 12px;
     padding: 10px 0;
     background: lighten($inputBackground, 7);
