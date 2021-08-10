@@ -1,4 +1,4 @@
-New version with more word sets and improved functionality available at: https://github.com/RichiePowell/japanese-practice
+**New version with more word sets and improved functionality available at: https://github.com/RichiePowell/japanese-practice**
 
 # Japanese Kana Game
 
