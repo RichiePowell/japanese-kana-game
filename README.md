@@ -1,3 +1,5 @@
+New version with more word sets and improved functionality available at: https://github.com/RichiePowell/japanese-practice
+
 # Japanese Kana Game
 
 A handy way to practice your Hiragana and Katakana. Like using flash cards, but with the power of React.
